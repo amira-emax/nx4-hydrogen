@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Image Future';
+  src: url('./fonts/ImageFuture-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Image Future';
+  src: url('./fonts/ImageFuture-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Image Future';
+  src: url('./fonts/ImageFuture-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Image Future';
+  src: url('./fonts/ImageFuture-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
