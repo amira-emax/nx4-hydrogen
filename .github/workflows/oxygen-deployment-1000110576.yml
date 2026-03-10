@@ -16,21 +16,16 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
           check-latest: true
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
-
-      - name: Cache pnpm modules
-        id: cache-pnpm
+      - name: Cache node modules
+        id: cache-npm
         uses: actions/cache@v4
         env:
-          cache-name: cache-pnpm-modules
+          cache-name: cache-node-modules
         with:
-          path: ~/.pnpm-store
+          path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
@@ -38,9 +33,9 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Build and Publish to Oxygen
-        run: pnpm exec shopify hydrogen deploy
+        run: npx shopify hydrogen deploy
         env:
           SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN_1000110576 }}
