@@ -218,7 +218,6 @@ function loadDeferredData({context}: Route.LoaderArgs) {
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
 
-  const data = useRouteLoaderData<RootLoader>('root');
   return (
     <html lang="en">
       <head>
@@ -262,18 +261,8 @@ export function Layout({children}: {children?: React.ReactNode}) {
             }}
           ></iframe>
         </noscript>
-        {data ? (
-          <Analytics.Provider
-            cart={data.cart}
-            shop={data.shop}
-            consent={data.consent}
-          >
-            <PageLayout {...data}>{children}</PageLayout>
-            <GoogleTagManager />
-          </Analytics.Provider>
-        ) : (
-          children
-        )}
+       
+        {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
       </body>
@@ -304,6 +293,7 @@ export default function App() {
           <Outlet />
         </PageLayout>
       )}
+      <GoogleTagManager />
     </Analytics.Provider>
   );
 }
