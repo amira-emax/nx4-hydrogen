@@ -27,6 +27,7 @@ import {FOOTER_MENU_CMS_QUERY} from './graphql/cms/query/FooterMenuQuery';
 import {GLOBAL_SOCIAL_MEDIAS_QUERY} from './graphql/cms/query/GlobalSocialMediasQuery';
 import {MOBILE_MENU_CMS_QUERY} from './graphql/cms/query/MobileMenuQuery';
 import {GLOBAL_DESKTOP_HEADER_CMS_QUERY} from './graphql/cms/query/GlobalDesktopHeaderQuery';
+import {GoogleTagManager} from '~/components/GoogleTagManager';
 
 export type RootLoader = typeof loader;
 
@@ -217,6 +218,7 @@ function loadDeferredData({context}: Route.LoaderArgs) {
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
 
+  const data = useRouteLoaderData<RootLoader>('root');
   return (
     <html lang="en">
       <head>
@@ -229,8 +231,49 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <link rel="stylesheet" href={reactMediumImageZoomCss}></link>
         <Meta />
         <Links />
+        <script
+          nonce={nonce}
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({'csp_nonce': '${nonce}'}); 
+
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;
+            var n=d.querySelector('[nonce]');
+            n&&(j.setAttribute('nonce',n.nonce||n.getAttribute('nonce')));
+            f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-N77SSMH7');`,
+          }}
+        ></script>
       </head>
       <body>
+      <noscript>
+          <iframe
+            title="Google Tag Manager"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-N77SSMH7"
+            height="0"
+            width="0"
+            style={{
+              display: 'none',
+              visibility: 'hidden',
+            }}
+          ></iframe>
+        </noscript>
+        {data ? (
+          <Analytics.Provider
+            cart={data.cart}
+            shop={data.shop}
+            consent={data.consent}
+          >
+            <PageLayout {...data}>{children}</PageLayout>
+            <GoogleTagManager />
+          </Analytics.Provider>
+        ) : (
+          children
+        )}
         {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
