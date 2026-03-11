@@ -274,7 +274,6 @@ export function Layout({children}: {children?: React.ReactNode}) {
         ) : (
           children
         )}
-        {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
       </body>
