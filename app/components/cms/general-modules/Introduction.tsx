@@ -1,0 +1,394 @@
+import {Image} from '@shopify/hydrogen';
+import {useEffect, useRef} from 'react';
+import {cn} from '~/lib/utils';
+
+interface ImageBlockNode {
+  id: string;
+  brandImage?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
+  text?: {value?: string};
+  textPosition?: {value?: string};
+}
+
+export interface IntroductionFragment {
+  id: string;
+  type: string;
+  bgImage?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
+  bgOverlay?: {value?: string};
+  heroHeaderTop?: {value?: string};
+  headerTopColorType?: {value?: string};
+  headerTopColor?: {value?: string};
+  headerTopGradient?: {value?: string};
+  heroImage?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
+  heroImageOverlay?: {value?: string};
+  imageSize?: {value?: string};
+  imgPaddingTop?: {value?: string};
+  imgPaddingBottom?: {value?: string};
+  layout?: {value?: string};
+  textAlign?: {value?: string};
+  heroHeader?: {value?: string};
+  headerColorType?: {value?: string};
+  headerColor?: {value?: string};
+  headerGradient?: {value?: string};
+  heroLabel?: {value?: string};
+  heroDescription?: {value?: string};
+  urlLabel?: {value?: string};
+  url?: {value?: string};
+  contentColor?: {value?: string};
+  gridLabel?: {value?: string};
+  gridTitle?: {value?: string};
+  gridTextColor?: {value?: string};
+  gridHeadingAlign?: {value?: string};
+  imageAspect?: {value?: string};
+  overlay?: {value?: string};
+  overlayColor?: {value?: string};
+  textShadow?: {value?: string};
+  bottomHeader?: {value?: string};
+  bottomDescription?: {value?: string};
+  bottomDescPaddingTop?: {value?: string};
+  bottomDescPaddingBottom?: {value?: string};
+  imageBlocks?: {references?: {nodes: ImageBlockNode[]}};
+}
+
+interface IntroductionProps {
+  reference: IntroductionFragment;
+}
+
+export function Introduction({reference}: IntroductionProps) {
+  const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    imageRefs.current.forEach((img) => {
+      if (!img) return;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('scale-105');
+            } else {
+              entry.target.classList.remove('scale-105');
+            }
+          });
+        },
+        {threshold: 0.4},
+      );
+      observer.observe(img);
+      observers.push(observer);
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  const bgImage = reference.bgImage?.reference?.image;
+  const bgOverlay = reference.bgOverlay?.value;
+  const heroHeaderTop = reference.heroHeaderTop?.value;
+  const headerTopColorType = reference.headerTopColorType?.value || 'solid';
+  const headerTopColor = reference.headerTopColor?.value || '#000000';
+  const headerTopGradient = reference.headerTopGradient?.value;
+  const heroImage = reference.heroImage?.reference?.image;
+  const heroImageOverlay = reference.heroImageOverlay?.value;
+  const imageSize = reference.imageSize?.value || '100';
+  const imgPaddingTop = reference.imgPaddingTop?.value || '0';
+  const imgPaddingBottom = reference.imgPaddingBottom?.value || '0';
+  const layout = reference.layout?.value || 'image_first';
+  const textAlign = reference.textAlign?.value || 'text-start';
+  const heroHeader = reference.heroHeader?.value;
+  const headerColorType = reference.headerColorType?.value || 'solid';
+  const headerColor = reference.headerColor?.value || '#000000';
+  const headerGradient = reference.headerGradient?.value;
+  const heroLabel = reference.heroLabel?.value;
+  const heroDescription = reference.heroDescription?.value;
+  const urlLabel = reference.urlLabel?.value;
+  const url = reference.url?.value;
+  const contentColor = reference.contentColor?.value || '#333333';
+  const gridLabel = reference.gridLabel?.value;
+  const gridTitle = reference.gridTitle?.value;
+  const gridTextColor = reference.gridTextColor?.value || '#ffffff';
+  const gridHeadingAlign = reference.gridHeadingAlign?.value || 'text-left';
+  const imageAspect = reference.imageAspect?.value || 'aspect-square';
+  const showOverlay = reference.overlay?.value === 'true';
+  const overlayColor = reference.overlayColor?.value || 'linear-gradient(0deg, #4F3012 0%, rgba(59, 44, 23, 0) 33%)';
+  const showTextShadow = reference.textShadow?.value === 'true';
+  const bottomHeader = reference.bottomHeader?.value;
+  const bottomDescription = reference.bottomDescription?.value;
+  const bottomDescPaddingTop = reference.bottomDescPaddingTop?.value || '80';
+  const bottomDescPaddingBottom = reference.bottomDescPaddingBottom?.value || '80';
+  const imageBlocks = reference.imageBlocks?.references?.nodes || [];
+
+  const hasTextContent = heroHeader || heroLabel || heroDescription;
+
+  const headerStyle: React.CSSProperties =
+    headerColorType === 'solid'
+      ? {color: headerColor}
+      : {
+          background: headerGradient,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        };
+
+  const headerTopStyle: React.CSSProperties =
+    headerTopColorType === 'solid'
+      ? {color: headerTopColor}
+      : {
+          background: headerTopGradient,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        };
+
+  return (
+    <>
+      <div className="h-16 lg:hidden" />
+      <section>
+        <div
+          className="relative justify-center mx-auto"
+          style={
+            bgImage
+              ? {
+                  backgroundImage: `url('${bgImage.url}')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }
+              : undefined
+          }
+        >
+          {bgOverlay && (
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{background: bgOverlay}}
+            />
+          )}
+
+          {heroHeaderTop && (
+            <div className={cn('w-full px-20 pt-30', textAlign)}>
+              <h1
+                className="text-4xl md:text-5xl lg:text-6xl font-domaine-text leading-tight"
+                style={headerTopStyle}
+              >
+                {heroHeaderTop}
+              </h1>
+            </div>
+          )}
+
+          <div
+            className={cn(
+              layout === 'center'
+                ? 'relative flex items-center justify-center'
+                : cn(
+                    'flex flex-col md:flex-row items-center',
+                    layout === 'text_first' && 'md:flex-row-reverse',
+                  ),
+            )}
+          >
+            <div
+              className={cn(
+                'w-full',
+                layout !== 'center' ? 'md:w-1/2' : 'flex justify-center',
+              )}
+              style={{
+                paddingTop: `${imgPaddingTop}px`,
+                paddingBottom: `${imgPaddingBottom}px`,
+              }}
+            >
+              {heroImage && (
+                <Image
+                  data={heroImage}
+                  className={cn(layout === 'center' && 'mx-auto')}
+                  style={{maxWidth: `${imageSize}%`}}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                />
+              )}
+            </div>
+
+            {heroImageOverlay && (
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{background: heroImageOverlay}}
+              />
+            )}
+
+            {hasTextContent && (
+              <div
+                className={cn(
+                  layout !== 'center'
+                    ? 'w-full md:w-1/2 px-20'
+                    : 'absolute inset-0 flex justify-center pt-30 md:pt-65',
+                  textAlign,
+                )}
+              >
+                <div>
+                  {heroHeader && (
+                    <h1
+                      className="leading-tight text-4xl md:text-5xl lg:text-6xl font-domaine-text"
+                      style={headerStyle}
+                    >
+                      {heroHeader}
+                    </h1>
+                  )}
+                  {heroLabel && (
+                    <h3
+                      className="text-xl lg:text-2xl font-domaine-text"
+                      style={{color: contentColor}}
+                    >
+                      {heroLabel}
+                    </h3>
+                  )}
+                  {heroDescription && (
+                    <h3
+                      className="text-xl lg:text-2xl font-domaine-sans"
+                      style={{color: contentColor}}
+                    >
+                      {heroDescription}
+                    </h3>
+                  )}
+                  {urlLabel && url && (
+                    <h3
+                      className={cn(
+                        'md:text-xl lg:text-2xl font-domaine-sans',
+                        layout === 'center' ? 'py-5' : 'py-10',
+                      )}
+                    >
+                      <a
+                        href={url}
+                        className="nav-underline-dual"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <span className="nav-underline-dual" style={headerStyle}>
+                          {urlLabel}
+                        </span>
+                      </a>
+                    </h3>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {(gridLabel || gridTitle) && (
+            <div
+              className={cn(
+                'relative z-10 w-full px-15 md:px-25 mb-6',
+                gridHeadingAlign,
+              )}
+            >
+              {gridLabel && (
+                <p
+                  className="text-lg md:text-xl font-domaine-sans"
+                  style={{color: gridTextColor}}
+                >
+                  {gridLabel}
+                </p>
+              )}
+              {gridTitle && (
+                <h2
+                  className="text-2xl md:text-4xl font-domaine-text"
+                  style={{color: gridTextColor}}
+                >
+                  {gridTitle}
+                </h2>
+              )}
+            </div>
+          )}
+
+          {imageBlocks.length > 0 && (
+            <div
+              className={cn(
+                layout === 'center' &&
+                  'md:absolute inset-0 flex items-end justify-center pointer-events-none',
+              )}
+            >
+              <div className="flex flex-col md:flex-row gap-6 md:gap-30 px-15 md:px-25 items-center justify-center w-full">
+                {imageBlocks.map((block, idx) => {
+                  const blockImage = block.brandImage?.reference?.image;
+                  const blockText = block.text?.value;
+                  const blockTextPosition = block.textPosition?.value || 'center';
+
+                  return (
+                    <div
+                      key={block.id}
+                      className={cn(
+                        'relative overflow-hidden w-full rounded-3xl',
+                        imageAspect,
+                      )}
+                    >
+                      {blockImage && (
+                        <img
+                          ref={(el) => {
+                            imageRefs.current[idx] = el;
+                          }}
+                          src={blockImage.url}
+                          alt={blockImage.altText || ''}
+                          className="absolute inset-0 w-full h-full object-cover scale-100 transition-transform duration-1000 ease-out"
+                        />
+                      )}
+
+                      {showOverlay && (
+                        <div
+                          className="absolute inset-0"
+                          style={{background: overlayColor}}
+                        />
+                      )}
+
+                      {blockText && (
+                        <div
+                          className={cn(
+                            'absolute inset-0 flex px-6 py-6',
+                            blockTextPosition === 'top'
+                              ? 'items-start'
+                              : blockTextPosition === 'bottom'
+                                ? 'items-end'
+                                : 'items-center',
+                          )}
+                          style={{color: gridTextColor}}
+                        >
+                          <div className="w-full text-center">
+                            <span
+                              className={cn(
+                                'text-xl md:text-2xl font-domaine-text',
+                                showTextShadow && 'text-shadow-lg',
+                              )}
+                            >
+                              {blockText}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {(bottomHeader || bottomDescription) && (
+            <div
+              className="w-full relative z-10"
+              style={{
+                paddingTop: `${bottomDescPaddingTop}px`,
+                paddingBottom: `${bottomDescPaddingBottom}px`,
+              }}
+            >
+              <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+                {bottomHeader && (
+                  <h3
+                    className="text-2xl md:text-4xl mb-4 font-domaine-text"
+                    style={headerStyle}
+                  >
+                    {bottomHeader}
+                  </h3>
+                )}
+                {bottomDescription && (
+                  <p
+                    className="max-w-3xl mx-auto md:text-lg font-domaine-sans"
+                    style={{color: contentColor}}
+                  >
+                    {bottomDescription}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}

@@ -14,6 +14,7 @@ declare global {
     HOME_PAGE_CMS_SLUG?: string;
     ORIGINS_PAGE_CMS_SLUG?: string;
     CONTACT_US_PAGE_CMS_SLUG?: string;
+    PROMOTION_PAGE_CMS_SLUG?: string;
     // Global CMS
     GLOBAL_BANNER_CMS_SLUG?: string;
     GLOBAL_NEWSLETTER_POPUP_CMS_SLUG?: string;

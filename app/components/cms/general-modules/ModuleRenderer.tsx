@@ -1,6 +1,12 @@
 import {ProductBenefits} from '../product-modules/ProductBenefits';
 import {ProductCores} from '../product-modules/ProductCores';
 import {HeroImageWithCta} from './HeroImageWithCta';
+import {Introduction} from './Introduction';
+import type {IntroductionFragment} from './Introduction';
+import {ScrollableImage} from './ScrollableImage';
+import type {ScrollableImageFragment} from './ScrollableImage';
+import {BodyInfo} from './BodyInfo';
+import type {BodyInfoFragment} from './BodyInfo';
 import {HeroFeatured} from './HeroFeatured';
 import {HeroIngredients} from './HeroIngredients';
 import {HeroSlider} from './HeroSlider';
@@ -30,7 +36,10 @@ export type CmsModule =
   | HeroSliderFragment
   | HeroTextBlocksGroupFragment
   | ProductBenefitsFragment
-  | ProductCoresFragment;
+  | ProductCoresFragment
+  | IntroductionFragment
+  | ScrollableImageFragment
+  | BodyInfoFragment;
 
 interface ModuleRendererProps {
   modules: CmsModule[];
@@ -127,6 +136,30 @@ export default function ModuleRenderer({
                 key={module.id || index}
                 reference={module as ProductBenefitsFragment}
                 contentPromise={productArticlePromise}
+              />
+            );
+
+          case 'introduction_section':
+            return (
+              <Introduction
+                key={module.id || index}
+                reference={module as IntroductionFragment}
+              />
+            );
+
+          case 'scrollable_image':
+            return (
+              <ScrollableImage
+                key={module.id || index}
+                reference={module as ScrollableImageFragment}
+              />
+            );
+
+          case 'body_info':
+            return (
+              <BodyInfo
+                key={module.id || index}
+                reference={module as BodyInfoFragment}
               />
             );
 
