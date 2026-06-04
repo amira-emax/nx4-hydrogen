@@ -265,6 +265,109 @@ export type AccordionFragment = Pick<
   icon?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
 };
 
+export type BodyInfoFragment = Pick<StorefrontAPI.Metaobject, 'id' | 'type'> & {
+  bgImage?: StorefrontAPI.Maybe<{
+    reference?: StorefrontAPI.Maybe<{
+      image?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'height' | 'width' | 'url' | 'altText'>
+      >;
+    }>;
+  }>;
+  featuredImage?: StorefrontAPI.Maybe<{
+    reference?: StorefrontAPI.Maybe<{
+      image?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'height' | 'width' | 'url' | 'altText'>
+      >;
+    }>;
+  }>;
+  featuredVideo?: StorefrontAPI.Maybe<{
+    reference?: StorefrontAPI.Maybe<
+      Pick<StorefrontAPI.Video, 'id'> & {
+        sources: Array<Pick<StorefrontAPI.VideoSource, 'url' | 'mimeType'>>;
+      }
+    >;
+  }>;
+  sectionHeaderPadding?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  title?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  titleItalic?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  titleSemibold?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  subTitleNumber?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  subTitle?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  description?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  caption?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  headerFont?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  contentFont?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerColorType?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerColor?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerGradient?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  contentColor?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  sectionContentPadding?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  brandHeader?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  brandSubHeader?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  brandDescription?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  textUrl?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  linkUrl?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  urlLabelItalic?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  mediaItemHeight?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  mediaBlocks?: StorefrontAPI.Maybe<{
+    references?: StorefrontAPI.Maybe<{
+      nodes: Array<
+        Pick<StorefrontAPI.Metaobject, 'id'> & {
+          blockVideo?: StorefrontAPI.Maybe<{
+            reference?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.Video, 'id'> & {
+                sources: Array<
+                  Pick<StorefrontAPI.VideoSource, 'url' | 'mimeType'>
+                >;
+              }
+            >;
+          }>;
+          name?: StorefrontAPI.Maybe<
+            Pick<StorefrontAPI.MetaobjectField, 'value'>
+          >;
+          textPosition?: StorefrontAPI.Maybe<
+            Pick<StorefrontAPI.MetaobjectField, 'value'>
+          >;
+        }
+      >;
+    }>;
+  }>;
+};
+
 export type HeroAccordionsGroupFragment = Pick<
   StorefrontAPI.Metaobject,
   'id' | 'type'
@@ -701,6 +804,126 @@ export type HeroTextBlocksGroupFragment = Pick<
   }>;
 };
 
+export type IntroductionFragment = Pick<
+  StorefrontAPI.Metaobject,
+  'id' | 'type'
+> & {
+  bgImage?: StorefrontAPI.Maybe<{
+    reference?: StorefrontAPI.Maybe<{
+      image?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'height' | 'width' | 'url' | 'altText'>
+      >;
+    }>;
+  }>;
+  bgOverlay?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  heroHeaderTop?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerTopColorType?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerTopColor?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerTopGradient?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  heroImage?: StorefrontAPI.Maybe<{
+    reference?: StorefrontAPI.Maybe<{
+      image?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'height' | 'width' | 'url' | 'altText'>
+      >;
+    }>;
+  }>;
+  heroImageOverlay?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  imageSize?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  imgPaddingTop?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  imgPaddingBottom?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  layout?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  textAlign?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  heroHeader?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerColorType?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerColor?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerGradient?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  heroLabel?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  heroDescription?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  urlLabel?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  url?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  contentColor?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  gridLabel?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  gridTitle?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  gridTextColor?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  gridHeadingAlign?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  imageAspect?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  overlay?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  overlayColor?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  textShadow?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  bottomHeader?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  bottomDescription?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  bottomDescPaddingTop?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  bottomDescPaddingBottom?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  imageBlocks?: StorefrontAPI.Maybe<{
+    references?: StorefrontAPI.Maybe<{
+      nodes: Array<
+        Pick<StorefrontAPI.Metaobject, 'id'> & {
+          brandImage?: StorefrontAPI.Maybe<{
+            reference?: StorefrontAPI.Maybe<{
+              image?: StorefrontAPI.Maybe<
+                Pick<
+                  StorefrontAPI.Image,
+                  'height' | 'width' | 'url' | 'altText'
+                >
+              >;
+            }>;
+          }>;
+          text?: StorefrontAPI.Maybe<
+            Pick<StorefrontAPI.MetaobjectField, 'value'>
+          >;
+          textPosition?: StorefrontAPI.Maybe<
+            Pick<StorefrontAPI.MetaobjectField, 'value'>
+          >;
+        }
+      >;
+    }>;
+  }>;
+};
+
 export type ProductBenefitsFragment = Pick<
   StorefrontAPI.Metaobject,
   'id' | 'type'
@@ -812,6 +1035,80 @@ export type ProductHelpFragment = Pick<
                 >;
               }
             >;
+          }>;
+        }
+      >;
+    }>;
+  }>;
+};
+
+export type ScrollableImageFragment = Pick<
+  StorefrontAPI.Metaobject,
+  'id' | 'type'
+> & {
+  bgImage?: StorefrontAPI.Maybe<{
+    reference?: StorefrontAPI.Maybe<{
+      image?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'height' | 'width' | 'url' | 'altText'>
+      >;
+    }>;
+  }>;
+  bgPosition?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  bgFix?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  sectionHeight?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  textFade?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  contentFont?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerFont?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerColorType?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerColor?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  headerGradient?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  contentColor?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  textPosition?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  textAlignment?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  header?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  label?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  body?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  urlLabel?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  url?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  urlTextItalic?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  ctaFontWeight?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  logoImages?: StorefrontAPI.Maybe<{
+    references?: StorefrontAPI.Maybe<{
+      nodes: Array<
+        Pick<StorefrontAPI.Metaobject, 'id'> & {
+          logoImage?: StorefrontAPI.Maybe<{
+            reference?: StorefrontAPI.Maybe<{
+              image?: StorefrontAPI.Maybe<
+                Pick<
+                  StorefrontAPI.Image,
+                  'height' | 'width' | 'url' | 'altText'
+                >
+              >;
+            }>;
           }>;
         }
       >;
@@ -1691,6 +1988,315 @@ export type OriginsPageCmsQuery = {
               labels?: StorefrontAPI.Maybe<
                 Pick<StorefrontAPI.MetaobjectField, 'value'>
               >;
+            }
+          >;
+        }>;
+      }>;
+    }
+  >;
+};
+
+export type PromotionPageCmsQueryVariables = StorefrontAPI.Exact<{
+  handle: StorefrontAPI.Scalars['String']['input'];
+}>;
+
+export type PromotionPageCmsQuery = {
+  promotionPage?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Metaobject, 'id' | 'handle'> & {
+      modules?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          nodes: Array<
+            Pick<StorefrontAPI.Metaobject, 'id' | 'type'> & {
+              bgImage?: StorefrontAPI.Maybe<{
+                reference?: StorefrontAPI.Maybe<{
+                  image?: StorefrontAPI.Maybe<
+                    Pick<
+                      StorefrontAPI.Image,
+                      'height' | 'width' | 'url' | 'altText'
+                    >
+                  >;
+                }>;
+              }>;
+              bgOverlay?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              heroHeaderTop?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              headerTopColorType?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              headerTopColor?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              headerTopGradient?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              heroImage?: StorefrontAPI.Maybe<{
+                reference?: StorefrontAPI.Maybe<{
+                  image?: StorefrontAPI.Maybe<
+                    Pick<
+                      StorefrontAPI.Image,
+                      'height' | 'width' | 'url' | 'altText'
+                    >
+                  >;
+                }>;
+              }>;
+              heroImageOverlay?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              imageSize?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              imgPaddingTop?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              imgPaddingBottom?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              layout?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              textAlign?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              heroHeader?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              headerColorType?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              headerColor?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              headerGradient?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              heroLabel?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              heroDescription?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              urlLabel?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              url?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              contentColor?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              gridLabel?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              gridTitle?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              gridTextColor?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              gridHeadingAlign?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              imageAspect?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              overlay?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              overlayColor?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              textShadow?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              bottomHeader?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              bottomDescription?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              bottomDescPaddingTop?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              bottomDescPaddingBottom?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              imageBlocks?: StorefrontAPI.Maybe<{
+                references?: StorefrontAPI.Maybe<{
+                  nodes: Array<
+                    Pick<StorefrontAPI.Metaobject, 'id'> & {
+                      brandImage?: StorefrontAPI.Maybe<{
+                        reference?: StorefrontAPI.Maybe<{
+                          image?: StorefrontAPI.Maybe<
+                            Pick<
+                              StorefrontAPI.Image,
+                              'height' | 'width' | 'url' | 'altText'
+                            >
+                          >;
+                        }>;
+                      }>;
+                      text?: StorefrontAPI.Maybe<
+                        Pick<StorefrontAPI.MetaobjectField, 'value'>
+                      >;
+                      textPosition?: StorefrontAPI.Maybe<
+                        Pick<StorefrontAPI.MetaobjectField, 'value'>
+                      >;
+                    }
+                  >;
+                }>;
+              }>;
+              bgPosition?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              bgFix?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              sectionHeight?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              textFade?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              contentFont?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              headerFont?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              textPosition?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              textAlignment?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              header?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              label?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              body?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              urlTextItalic?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              ctaFontWeight?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              logoImages?: StorefrontAPI.Maybe<{
+                references?: StorefrontAPI.Maybe<{
+                  nodes: Array<
+                    Pick<StorefrontAPI.Metaobject, 'id'> & {
+                      logoImage?: StorefrontAPI.Maybe<{
+                        reference?: StorefrontAPI.Maybe<{
+                          image?: StorefrontAPI.Maybe<
+                            Pick<
+                              StorefrontAPI.Image,
+                              'height' | 'width' | 'url' | 'altText'
+                            >
+                          >;
+                        }>;
+                      }>;
+                    }
+                  >;
+                }>;
+              }>;
+              featuredImage?: StorefrontAPI.Maybe<{
+                reference?: StorefrontAPI.Maybe<{
+                  image?: StorefrontAPI.Maybe<
+                    Pick<
+                      StorefrontAPI.Image,
+                      'height' | 'width' | 'url' | 'altText'
+                    >
+                  >;
+                }>;
+              }>;
+              featuredVideo?: StorefrontAPI.Maybe<{
+                reference?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Video, 'id'> & {
+                    sources: Array<
+                      Pick<StorefrontAPI.VideoSource, 'url' | 'mimeType'>
+                    >;
+                  }
+                >;
+              }>;
+              sectionHeaderPadding?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              title?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              titleItalic?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              titleSemibold?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              subTitleNumber?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              subTitle?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              description?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              caption?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              sectionContentPadding?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              brandHeader?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              brandSubHeader?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              brandDescription?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              textUrl?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              linkUrl?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              urlLabelItalic?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              mediaItemHeight?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              mediaBlocks?: StorefrontAPI.Maybe<{
+                references?: StorefrontAPI.Maybe<{
+                  nodes: Array<
+                    Pick<StorefrontAPI.Metaobject, 'id'> & {
+                      blockVideo?: StorefrontAPI.Maybe<{
+                        reference?: StorefrontAPI.Maybe<
+                          Pick<StorefrontAPI.Video, 'id'> & {
+                            sources: Array<
+                              Pick<
+                                StorefrontAPI.VideoSource,
+                                'url' | 'mimeType'
+                              >
+                            >;
+                          }
+                        >;
+                      }>;
+                      name?: StorefrontAPI.Maybe<
+                        Pick<StorefrontAPI.MetaobjectField, 'value'>
+                      >;
+                      textPosition?: StorefrontAPI.Maybe<
+                        Pick<StorefrontAPI.MetaobjectField, 'value'>
+                      >;
+                    }
+                  >;
+                }>;
+              }>;
             }
           >;
         }>;
@@ -3353,6 +3959,10 @@ interface GeneratedQueryTypes {
   '#graphql\n  # Generic fragments\n  #graphql\n  fragment Image on MediaImage {\n    image {\n      height\n      width\n      url\n      altText\n    }\n  }\n\n  #graphql\n  fragment Cta on Metaobject {\n    id\n    type\n    label: field(key: "label") {\n      value\n    }\n    internalUrl: field(key: "internal_url") {\n      value\n    }\n    externalUrl: field(key: "external_url") {\n      value\n    }\n    referencedProduct: field(key: "referenced_product") {\n      reference {\n        ... on Product{\n          id\n          title\n          handle\n        }\n      }\n    }\n    buttonVariant: field(key: "button_variant") {\n      value\n    }\n    buttonSize: field(key: "button_size") {\n      value\n    }\n    iconVariant: field(key: "icon_variant") {\n      value\n    }\n  }\n  #graphql\n  fragment CarouselItem on Metaobject {\n    id\n    type\n    label: field(key: "label") {\n      value\n    }\n    description: field(key: "description") {\n      value\n    }\n    caption: field(key: "caption") {\n      value\n    }\n    logo: field(key: "logo") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    image: field(key: "image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    layout: field(key: "layout") {\n      value\n    }\n    externalUrl: field(key: "external_url") {\n      value\n    }\n    internalUrl: field(key: "internal_url") {\n      value\n    }\n    referencedProduct: field(key: "referenced_product") {\n      reference {\n        ... on Product{\n          id\n          title\n          handle\n        }\n      }\n    }\n  }\n  #graphql\n  fragment IngredientItem on Metaobject {\n    id\n    type\n    title: field(key: "title") {\n      value\n    }\n    description: field(key: "description") {\n      value\n    }\n  }\n  #graphql\n  fragment ProductFeatureCard on Metaobject {\n    id\n    type\n    title: field(key: "title") {\n      value\n    }\n    label: field(key: "label") {\n      value\n    }\n  }\n  #graphql\n  fragment SliderItem on Metaobject {\n    id\n    type\n    title: field(key: "title") {\n      value\n    }\n    label: field(key: "label") {\n      value\n    }\n    description: field(key: "description") {\n      value\n    }\n    desktopImage: field(key: "desktop_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    mobileImage: field(key: "mobile_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n  }\n\n  # Module fragments\n  #graphql\n  fragment HeroImageWithCta on Metaobject {\n    id\n    type\n    desktopImage: field(key: "desktop_image") {\n      references(first: 2) {\n        nodes {\n          ... on MediaImage {\n            ...Image\n          }\n        }\n      }\n    }\n    mobileImage: field(key: "mobile_image") {\n      references(first: 2) {\n        nodes {\n          ... on MediaImage {\n            ...Image\n          }\n        }\n      }\n    }\n    desktopHeight: field(key: "desktop_height") {\n      value\n    }\n    mobileHeight: field(key: "mobile_height") {\n      value\n    }\n    title: field(key: "title") {\n      value\n    }\n    subtitle: field(key: "subtitle") {\n      value\n    }\n    description: field(key: "description") {\n      value\n    }\n    cta: field(key: "cta") {\n      reference {\n        ... on Metaobject {\n          ...Cta\n        }\n      }\n    }\n    contentGradient: field(key: "content_gradient") {\n      value\n    }\n    contentPosition: field(key: "content_position") {\n      value\n    }\n    contentOffset: field(key: "content_offset") {\n      value\n    }\n    contentColor: field(key: "content_color") {\n      value\n    }\n    anchor: field(key: "anchor") {\n      reference {\n        ... on Product {\n          id\n          title\n          handle\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment HeroCarousel on Metaobject {\n    id\n    type\n    title: field(key: "title") {\n      value\n    }\n    description: field(key: "description") {\n      value\n    }\n    cta: field(key: "cta") {\n      reference {\n        ... on Metaobject {\n          ...Cta\n        }\n      }\n    }\n    items: field(key: "items") {\n      references(first: 20) {\n        nodes {\n          ... on Metaobject {\n            ...CarouselItem\n          }\n        }\n      }\n    }\n    anchor: field(key: "anchor") {\n      reference {\n        ... on Product {\n          id\n          title\n          handle\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment HeroFeatured on Metaobject {\n    id\n    type\n    label: field(key: "label") {\n      value\n    }\n    description: field(key: "description") {\n      value\n    }\n    platforms: field(key: "platforms") {\n      references(first: 20) {\n        nodes {\n          ... on MediaImage {\n            ...Image\n          }\n        }\n      }\n    }\n    anchor: field(key: "anchor") {\n      reference {\n        ... on Product {\n          id\n          title\n          handle\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment HeroIngredients on Metaobject {\n    id\n    type\n    title: field(key: "title") {\n      value\n    }\n    logo: field(key: "logo") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    rotateLogo: field(key: "rotate_logo") {\n      value\n    }\n    desktopImage: field(key: "desktop_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    mobileImage: field(key: "mobile_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    desktopHeight: field(key: "desktop_height") {\n      value\n    }\n    mobileHeight: field(key: "mobile_height") {\n      value\n    }\n    items: field(key: "items") {\n      references(first: 20) {\n        nodes {\n          ... on Metaobject {\n            ...IngredientItem\n          }\n        }\n      }\n    }\n    cta: field(key: "cta") {\n      reference {\n        ... on Metaobject {\n          ...Cta\n        }\n      }\n    }\n    anchor: field(key: "anchor") {\n      reference {\n        ... on Product {\n          id\n          title\n          handle\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment HeroSlider on Metaobject {\n    id\n    type\n    items: field(key: "items") {\n      references(first: 20) {\n        nodes {\n          ... on Metaobject {\n            ...SliderItem\n          }\n        }\n      }\n    }\n    desktopHeight: field(key: "desktop_height") {\n      value\n    }\n    mobileHeight: field(key: "mobile_height") {\n      value\n    }\n    anchor: field(key: "anchor") {\n      reference {\n        ... on Product {\n          id\n          title\n          handle\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment ProductBenefits on Metaobject {\n    id\n    type\n    label: field(key: "label") {\n      value\n    }\n    title: field(key: "title") {\n      value\n    }\n    cards: field(key: "cards") {\n      references(first: 20) {\n        nodes {\n          ... on Metaobject {\n            ...ProductFeatureCard\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment ProductCores on Metaobject {\n    id\n    type\n    labels: field(key: "labels") {\n      value\n    }\n    desktopImage: field(key: "desktop_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    mobileImage: field(key: "mobile_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n  }\n\n  \n  query OriginsPageCms($handle: String!) {\n    originsPage: metaobject(handle: {handle: $handle, type: "origins_page"}) {\n      id\n      handle\n      modules: field(key: "modules") {\n        references(first: 20) {\n          nodes {\n            ... on Metaobject {\n              id\n              type\n              # Module fragments\n              ...HeroImageWithCta\n              ...HeroCarousel\n              ...HeroFeatured\n              ...HeroIngredients\n              ...HeroSlider\n              ...ProductBenefits\n              ...ProductCores\n            }\n          }\n        }\n      }\n    }\n  }\n': {
     return: OriginsPageCmsQuery;
     variables: OriginsPageCmsQueryVariables;
+  };
+  '#graphql\n  # Generic fragments\n  #graphql\n  fragment Image on MediaImage {\n    image {\n      height\n      width\n      url\n      altText\n    }\n  }\n\n\n  # Module fragments\n  #graphql\n  fragment Introduction on Metaobject {\n    id\n    type\n    bgImage: field(key: "bg_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    bgOverlay: field(key: "bg_overlay") {\n      value\n    }\n    heroHeaderTop: field(key: "hero_header_top") {\n      value\n    }\n    headerTopColorType: field(key: "header_top_color_type") {\n      value\n    }\n    headerTopColor: field(key: "header_top_color") {\n      value\n    }\n    headerTopGradient: field(key: "header_top_gradient") {\n      value\n    }\n    heroImage: field(key: "hero_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    heroImageOverlay: field(key: "hero_image_overlay") {\n      value\n    }\n    imageSize: field(key: "image_size") {\n      value\n    }\n    imgPaddingTop: field(key: "img_padding_top") {\n      value\n    }\n    imgPaddingBottom: field(key: "img_padding_bottom") {\n      value\n    }\n    layout: field(key: "layout") {\n      value\n    }\n    textAlign: field(key: "text_align") {\n      value\n    }\n    heroHeader: field(key: "hero_header") {\n      value\n    }\n    headerColorType: field(key: "header_color_type") {\n      value\n    }\n    headerColor: field(key: "header_color") {\n      value\n    }\n    headerGradient: field(key: "header_gradient") {\n      value\n    }\n    heroLabel: field(key: "hero_label") {\n      value\n    }\n    heroDescription: field(key: "hero_description") {\n      value\n    }\n    urlLabel: field(key: "url_label") {\n      value\n    }\n    url: field(key: "url") {\n      value\n    }\n    contentColor: field(key: "content_color") {\n      value\n    }\n    gridLabel: field(key: "grid_label") {\n      value\n    }\n    gridTitle: field(key: "grid_title") {\n      value\n    }\n    gridTextColor: field(key: "grid_text_color") {\n      value\n    }\n    gridHeadingAlign: field(key: "grid_heading_align") {\n      value\n    }\n    imageAspect: field(key: "image_aspect") {\n      value\n    }\n    overlay: field(key: "overlay") {\n      value\n    }\n    overlayColor: field(key: "overlay_color") {\n      value\n    }\n    textShadow: field(key: "text_shadow") {\n      value\n    }\n    bottomHeader: field(key: "header") {\n      value\n    }\n    bottomDescription: field(key: "description") {\n      value\n    }\n    bottomDescPaddingTop: field(key: "bottom_desc_padding_top") {\n      value\n    }\n    bottomDescPaddingBottom: field(key: "bottom_desc_padding_bottom") {\n      value\n    }\n    imageBlocks: field(key: "image_blocks") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            id\n            brandImage: field(key: "brand_image") {\n              reference {\n                ... on MediaImage {\n                  ...Image\n                }\n              }\n            }\n            text: field(key: "text") {\n              value\n            }\n            textPosition: field(key: "text_position") {\n              value\n            }\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment ScrollableImage on Metaobject {\n    id\n    type\n    bgImage: field(key: "bg_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    bgPosition: field(key: "bg_position") {\n      value\n    }\n    bgFix: field(key: "bg_fix") {\n      value\n    }\n    sectionHeight: field(key: "section_height") {\n      value\n    }\n    textFade: field(key: "text_fade") {\n      value\n    }\n    contentFont: field(key: "content_font") {\n      value\n    }\n    headerFont: field(key: "header_font") {\n      value\n    }\n    headerColorType: field(key: "header_color_type") {\n      value\n    }\n    headerColor: field(key: "header_color") {\n      value\n    }\n    headerGradient: field(key: "header_gradient") {\n      value\n    }\n    contentColor: field(key: "content_color") {\n      value\n    }\n    textPosition: field(key: "text_position") {\n      value\n    }\n    textAlignment: field(key: "text_alignment") {\n      value\n    }\n    header: field(key: "header") {\n      value\n    }\n    label: field(key: "label") {\n      value\n    }\n    body: field(key: "body") {\n      value\n    }\n    urlLabel: field(key: "url_label") {\n      value\n    }\n    url: field(key: "url") {\n      value\n    }\n    urlTextItalic: field(key: "url_text_italic") {\n      value\n    }\n    ctaFontWeight: field(key: "cta_font_weight") {\n      value\n    }\n    logoImages: field(key: "logo_images") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            id\n            logoImage: field(key: "logo_image") {\n              reference {\n                ... on MediaImage {\n                  ...Image\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment BodyInfo on Metaobject {\n    id\n    type\n    bgImage: field(key: "bg_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    featuredImage: field(key: "image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    featuredVideo: field(key: "video") {\n      reference {\n        ... on Video {\n          id\n          sources {\n            url\n            mimeType\n          }\n        }\n      }\n    }\n    sectionHeaderPadding: field(key: "section_header_padding") {\n      value\n    }\n    title: field(key: "title") {\n      value\n    }\n    titleItalic: field(key: "title_italic") {\n      value\n    }\n    titleSemibold: field(key: "title_semibold") {\n      value\n    }\n    subTitleNumber: field(key: "sub_title_number") {\n      value\n    }\n    subTitle: field(key: "sub_title") {\n      value\n    }\n    description: field(key: "description") {\n      value\n    }\n    caption: field(key: "caption") {\n      value\n    }\n    headerFont: field(key: "header_font") {\n      value\n    }\n    contentFont: field(key: "content_font") {\n      value\n    }\n    headerColorType: field(key: "header_color_type") {\n      value\n    }\n    headerColor: field(key: "header_color") {\n      value\n    }\n    headerGradient: field(key: "header_gradient") {\n      value\n    }\n    contentColor: field(key: "content_color") {\n      value\n    }\n    sectionContentPadding: field(key: "section_content_padding") {\n      value\n    }\n    brandHeader: field(key: "brand_header") {\n      value\n    }\n    brandSubHeader: field(key: "brand_sub_header") {\n      value\n    }\n    brandDescription: field(key: "brand_description") {\n      value\n    }\n    textUrl: field(key: "text_url") {\n      value\n    }\n    linkUrl: field(key: "link_url") {\n      value\n    }\n    urlLabelItalic: field(key: "url_label_italic") {\n      value\n    }\n    mediaItemHeight: field(key: "media_item_height") {\n      value\n    }\n    mediaBlocks: field(key: "media_blocks") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            id\n            blockVideo: field(key: "video") {\n              reference {\n                ... on Video {\n                  id\n                  sources {\n                    url\n                    mimeType\n                  }\n                }\n              }\n            }\n            name: field(key: "name") {\n              value\n            }\n            textPosition: field(key: "text_position") {\n              value\n            }\n          }\n        }\n      }\n    }\n  }\n\n\n  query PromotionPageCms($handle: String!) {\n    promotionPage: metaobject(handle: {handle: $handle, type: "promotion_page"}) {\n      id\n      handle\n      modules: field(key: "modules") {\n        references(first: 20) {\n          nodes {\n            ... on Metaobject {\n              id\n              type\n              # Module fragments\n              ...Introduction\n              ...ScrollableImage\n              ...BodyInfo\n            }\n          }\n        }\n      }\n    }\n  }\n': {
+    return: PromotionPageCmsQuery;
+    variables: PromotionPageCmsQueryVariables;
   };
   '#graphql\n  fragment Shop on Shop {\n    id\n    name\n    description\n    primaryDomain {\n      url\n    }\n    brand {\n      logo {\n        image {\n          url\n        }\n      }\n    }\n  }\n  query Header(\n    $country: CountryCode\n    $headerMenuHandle: String!\n    $language: LanguageCode\n  ) @inContext(language: $language, country: $country) {\n    shop {\n      ...Shop\n    }\n    menu(handle: $headerMenuHandle) {\n      ...Menu\n    }\n  }\n  #graphql\n  fragment MenuItem on MenuItem {\n    id\n    resourceId\n    tags\n    title\n    type\n    url\n  }\n  fragment ChildMenuItem on MenuItem {\n    ...MenuItem\n  }\n  fragment ParentMenuItem on MenuItem {\n    ...MenuItem\n    items {\n      ...ChildMenuItem\n    }\n  }\n  fragment Menu on Menu {\n    id\n    items {\n      ...ParentMenuItem\n    }\n  }\n\n': {
     return: HeaderQuery;
