@@ -1,5 +1,5 @@
 import {Image} from '@shopify/hydrogen';
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {cn} from '~/lib/utils';
 
 interface VideoSource {
@@ -14,12 +14,35 @@ interface MediaBlockNode {
   textPosition?: {value?: string};
 }
 
+interface CertLogoNode {
+  id: string;
+  image?: {url: string; altText?: string; width?: number; height?: number};
+}
+
 export interface BodyInfoFragment {
   id: string;
   type: string;
-  bgImage?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
-  featuredImage?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
+  bgImage?: {
+    reference?: {
+      image?: {url: string; altText?: string; width?: number; height?: number};
+    };
+  };
+  featuredImage?: {
+    reference?: {
+      image?: {url: string; altText?: string; width?: number; height?: number};
+    };
+  };
+  featuredImages?: {
+    references?: {
+      nodes: {image?: {url: string; altText?: string; width?: number; height?: number}}[];
+    };
+  };
   featuredVideo?: {reference?: {id?: string; sources?: VideoSource[]}};
+  sectionImage?: {
+    reference?: {
+      image?: {url: string; altText?: string; width?: number; height?: number};
+    };
+  };
   sectionHeaderPadding?: {value?: string};
   title?: {value?: string};
   titleItalic?: {value?: string};
@@ -38,6 +61,7 @@ export interface BodyInfoFragment {
   brandHeader?: {value?: string};
   brandSubHeader?: {value?: string};
   brandDescription?: {value?: string};
+  certLogos?: {references?: {nodes: CertLogoNode[]}};
   textUrl?: {value?: string};
   linkUrl?: {value?: string};
   urlLabelItalic?: {value?: string};
@@ -55,7 +79,18 @@ export function BodyInfo({reference}: BodyInfoProps) {
 
   const bgImage = reference.bgImage?.reference?.image;
   const featuredImage = reference.featuredImage?.reference?.image;
-  const featuredVideoSources = reference.featuredVideo?.reference?.sources || [];
+  const featuredImages = (reference.featuredImages?.references?.nodes || [])
+    .map((n) => n.image)
+    .filter((img): img is {url: string; altText?: string; width?: number; height?: number} => !!img);
+  const slideImages = featuredImages.length > 0
+    ? featuredImages
+    : featuredImage
+      ? [featuredImage]
+      : [];
+  const featuredVideoSources =
+    reference.featuredVideo?.reference?.sources || [];
+
+  const [activeSlide, setActiveSlide] = useState(0);
   const sectionHeaderPadding = reference.sectionHeaderPadding?.value || '0';
   const title = reference.title?.value;
   const titleItalic = reference.titleItalic?.value === 'true';
@@ -79,6 +114,8 @@ export function BodyInfo({reference}: BodyInfoProps) {
   const textUrl = reference.textUrl?.value;
   const linkUrl = reference.linkUrl?.value;
   const urlLabelItalic = reference.urlLabelItalic?.value === 'true';
+  const sectionImage = reference.sectionImage?.reference?.image;
+  const certLogos = reference.certLogos?.references?.nodes || [];
   const mediaItemHeight = reference.mediaItemHeight?.value || 'aspect-square';
   const mediaBlocks = reference.mediaBlocks?.references?.nodes || [];
 
@@ -118,6 +155,14 @@ export function BodyInfo({reference}: BodyInfoProps) {
     return () => cleanups.forEach((fn) => fn());
   }, []);
 
+  useEffect(() => {
+    if (slideImages.length <= 1) return;
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slideImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [slideImages.length]);
+
   const headerGradientStyle: React.CSSProperties = {
     background: headerGradient,
     WebkitBackgroundClip: 'text',
@@ -136,7 +181,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
   return (
     <section>
       <div
-        className="relative justify-center mx-auto pt-20"
+        className="relative justify-center mx-auto py-20"
         style={{
           ...(bgImage
             ? {
@@ -149,82 +194,124 @@ export function BodyInfo({reference}: BodyInfoProps) {
         }}
       >
         {/* Top grid: text + featured media */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 items-center px-2 lg:px-20"
-          style={{paddingBlock: `${sectionHeaderPadding}rem`}}
-        >
-          {/* Text content */}
-          <div className="flex items-start justify-center h-full py-10">
-            <div className="md:col-span-2 flex flex-col justify-center mt-6 md:mt-0">
-              <div ref={headerRef} className="px-10" style={headerGradientStyle}>
-                {title && (
-                  <h2
-                    className={cn(
-                      'text-2xl',
-                      contentFont,
-                      titleItalic && 'italic',
-                      titleSemibold && 'font-semibold',
-                    )}
-                  >
-                    {title}
-                  </h2>
-                )}
-                {subTitleNumber && (
-                  <h1 className={cn('text-4xl md:text-5xl font-bold italic', headerFont)}>
-                    {subTitleNumber}
-                  </h1>
-                )}
-                {subTitle && (
-                  <h2 className={cn('text-2xl', contentFont)}>{subTitle}</h2>
-                )}
-              </div>
-
-              <div ref={descRef} className="px-10 py-10 md:text-lg">
-                {description && (
-                  <p className={cn('mb-4', contentFont)}>{description}</p>
-                )}
-                {caption && (
-                  <div className={cn('py-20', contentFont)}>
-                    <p className="border-l-4 pl-3">{caption}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Featured media */}
-          <div className="justify-items-center">
-            <div className="md:col-span-1 flex items-center justify-center w-[20rem] md:w-[30rem] aspect-[3/4] overflow-hidden">
-              {featuredImage ? (
-                <Image
-                  data={featuredImage}
-                  className="object-cover shadow-md rounded w-full h-full"
-                  sizes="(min-width: 768px) 480px, 320px"
-                />
-              ) : featuredVideoSources.length > 0 ? (
-                <video
-                  autoPlay
-                  muted
-                  playsInline
-                  loop
-                  className="w-full h-full object-cover rounded-3xl shadow-md z-10"
+        {(title ||
+          subTitleNumber ||
+          subTitle ||
+          description ||
+          caption ||
+          featuredImage ||
+          featuredVideoSources.length > 0) && (
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 items-center px-2 lg:px-20"
+            style={{paddingBlock: `${sectionHeaderPadding}rem`}}
+          >
+            {/* Text content */}
+            <div className="flex items-start justify-center h-full py-10">
+              <div className="md:col-span-2 flex flex-col justify-center mt-6 md:mt-0">
+                <div
+                  ref={headerRef}
+                  className="px-10"
+                  style={headerGradientStyle}
                 >
-                  {featuredVideoSources.map((src) => (
-                    <source key={src.url} src={src.url} type={src.mimeType} />
-                  ))}
-                </video>
-              ) : null}
+                  {title && (
+                    <h2
+                      className={cn(
+                        'text-3xl',
+                        contentFont,
+                        titleItalic && 'italic',
+                        titleSemibold && 'font-semibold',
+                      )}
+                    >
+                      {title}
+                    </h2>
+                  )}
+                  {subTitleNumber && (
+                    <h1
+                      className={cn(
+                        'text-4xl md:text-5xl font-semibold italic',
+                        headerFont,
+                      )}
+                    >
+                      {subTitleNumber}
+                    </h1>
+                  )}
+                  {subTitle && (
+                    <h2 className={cn('text-3xl', contentFont)}>{subTitle}</h2>
+                  )}
+                </div>
+
+                <div ref={descRef} className="px-10 py-10 ">
+                  {description && (
+                    <p className={cn('mb-4 md:text-lg lg:text-2xl', contentFont)}>{description}</p>
+                  )}
+                  {caption && (
+                    <div className={cn('py-20', contentFont)}>
+                      <p className="md:text-lg lg:text-2xl font-semibold">{caption}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Featured media */}
+            <div className="justify-items-center">
+              <div className="md:col-span-1 flex items-center justify-center w-[20rem] md:w-[30rem] aspect-[3/4] overflow-hidden relative">
+                {slideImages.length > 0 ? (
+                  <>
+                    {slideImages.map((img, idx) => (
+                      <img
+                        key={idx}
+                        src={img.url}
+                        alt={img.altText || ''}
+                        className={cn(
+                          'absolute inset-0  object-cover shadow-md rounded-3xl transition-opacity duration-700',
+                          idx === activeSlide ? 'opacity-100' : 'opacity-0',
+                        )}
+                      />
+                    ))}
+                    
+                  </>
+                ) : featuredVideoSources.length > 0 ? (
+                  <video
+                    autoPlay
+                    muted
+                    playsInline
+                    loop
+                    className="w-full h-full object-cover rounded-3xl shadow-md z-10"
+                  >
+                    {featuredVideoSources.map((src) => (
+                      <source key={src.url} src={src.url} type={src.mimeType} />
+                    ))}
+                  </video>
+                ) : null}
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
+        {/* Section image */}
+        {sectionImage && (
+          <div className="flex justify-center px-6 pt-10">
+            <Image
+              data={sectionImage}
+              className="rounded-2xl shadow-md w-full max-w-4xl object-cover"
+              sizes="(min-width: 768px) 672px, 100vw"
+            />
+          </div>
+        )}
+        
 
         {/* Brand / content section */}
+        {(brandHeader || brandSubHeader || brandDescription || (textUrl && linkUrl)) && (
         <div className="pt-10 md:pt-20">
-          <div className="px-6" style={{paddingBlock: `${sectionContentPadding}rem`}}>
+          <div
+            className="px-6"
+            style={{paddingBlock: `${sectionContentPadding}rem`}}
+          >
             {brandHeader && (
-              <div className="text-center py-10">
+              <div className="text-center">
                 <h2
-                  className={cn('text-3xl md:text-4xl italic', headerFont)}
+                  className={cn('text-2xl md:text-3xl font-semibold', headerFont)}
                   style={brandHeaderStyle}
                 >
                   {brandHeader}
@@ -232,7 +319,12 @@ export function BodyInfo({reference}: BodyInfoProps) {
               </div>
             )}
             {brandSubHeader && (
-              <h2 className={cn('md:text-2xl font-normal mt-12 mb-4 text-center', contentFont)}>
+              <h2
+                className={cn(
+                  'md:text-2xl font-normal mt-12 mb-4 text-center',
+                  contentFont,
+                )}
+              >
                 {brandSubHeader}
               </h2>
             )}
@@ -261,59 +353,30 @@ export function BodyInfo({reference}: BodyInfoProps) {
               </h2>
             )}
           </div>
-
-          {/* Media grid */}
-          {mediaBlocks.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-items-center">
-              {mediaBlocks.map((block) => {
-                const videoSources = block.blockVideo?.reference?.sources || [];
-                const blockName = block.name?.value;
-                const textPosition = block.textPosition?.value || 'center';
-
-                return (
-                  <div
-                    key={block.id}
-                    className={cn('relative overflow-hidden w-full', mediaItemHeight)}
-                  >
-                    {videoSources.length > 0 && (
-                      <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover"
-                      >
-                        {videoSources.map((src) => (
-                          <source key={src.url} src={src.url} type={src.mimeType} />
-                        ))}
-                      </video>
-                    )}
-
-                    {blockName && (
-                      <div
-                        className={cn(
-                          'absolute inset-0 flex px-6 py-6',
-                          contentFont,
-                          textPosition === 'top'
-                            ? 'items-start'
-                            : textPosition === 'bottom'
-                              ? 'items-end'
-                              : 'items-center',
-                        )}
-                      >
-                        <div className="w-full text-center">
-                          <span className={cn('text-shadow-lg text-2xl italic', contentFont)}>
-                            {blockName}
-                          </span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          )}
         </div>
+        )}
+
+        {certLogos.length > 0 && (
+          <div className="max-w-2xl mx-auto">
+            <div
+              className="px-6"
+              style={{paddingBlock: `${sectionContentPadding}rem`}}
+            >
+              <div className="flex justify-center items-center">
+                {certLogos.map((logo) =>
+                  logo.image ? (
+                    <Image
+                      key={logo.id}
+                      data={logo.image}
+                      className="h-16 md:h-25 w-auto object-contain"
+                      sizes="80px"
+                    />
+                  ) : null,
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

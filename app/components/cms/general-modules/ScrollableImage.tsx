@@ -2,6 +2,24 @@ import {Image} from '@shopify/hydrogen';
 import {useEffect, useRef} from 'react';
 import {cn} from '~/lib/utils';
 
+function parseRichText(value?: string): string {
+  if (!value) return '';
+  try {
+    const ast = JSON.parse(value);
+    const extract = (node: any): string => {
+      if (node.type === 'text') return node.value || '';
+      if (Array.isArray(node.children)) {
+        const sep = node.type === 'root' ? '\n' : '';
+        return node.children.map(extract).join(sep);
+      }
+      return '';
+    };
+    return extract(ast);
+  } catch {
+    return value;
+  }
+}
+
 interface LogoImageNode {
   id: string;
   logoImage?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
@@ -23,6 +41,7 @@ export interface ScrollableImageFragment {
   contentColor?: {value?: string};
   textPosition?: {value?: string};
   textAlignment?: {value?: string};
+  contentAlignment?: {value?: string};
   header?: {value?: string};
   label?: {value?: string};
   body?: {value?: string};
@@ -53,9 +72,10 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
   const contentColor = reference.contentColor?.value || '#000000';
   const textPosition = reference.textPosition?.value || 'center';
   const textAlignment = reference.textAlignment?.value || 'left';
+  const contentAlignment = reference.contentAlignment?.value || 'left';
   const header = reference.header?.value;
   const label = reference.label?.value;
-  const body = reference.body?.value;
+  const body = parseRichText(reference.body?.value);
   const urlLabel = reference.urlLabel?.value;
   const url = reference.url?.value;
   const urlTextItalic = reference.urlTextItalic?.value === 'true';
@@ -89,12 +109,19 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
         ? 'items-end'
         : 'items-center';
 
-  const contentAlignClass =
+  const columnClass =
+    contentAlignment === 'center'
+      ? 'mx-auto w-full'
+      : contentAlignment === 'right'
+        ? 'ml-auto w-full md:w-1/2'
+        : 'w-full md:w-1/2';
+
+  const textAlignClass =
     textAlignment === 'center'
-      ? 'text-center mx-auto max-w-5xl'
+      ? 'text-center'
       : textAlignment === 'right'
-        ? 'text-right ml-auto'
-        : 'text-left max-w-2xl';
+        ? 'text-right'
+        : 'text-left';
 
   const headerStyle: React.CSSProperties =
     headerColorType === 'solid'
@@ -118,12 +145,12 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
     >
       <div
         ref={contentRef}
-        className={cn('p-10 lg:px-8 relative z-10', contentAlignClass)}
+        className={cn('p-10 lg:px-8 relative z-10', columnClass, textAlignClass)}
         style={{color: contentColor}}
       >
         {header && (
           <h2
-            className={cn('mb-2 md:text-lg font-bold', headerFont)}
+            className={cn('mb-2 text-lg md:text-2xl lg:text-3xl', headerFont)}
             style={headerStyle}
           >
             {header}
@@ -131,19 +158,19 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
         )}
 
         {label && (
-          <h2 className={cn('mb-2 md:text-lg font-bold', contentFont)}>
+          <h2 className={cn('mb-2 text-xl md:text-3xl lg:text-4xl font-bold', contentFont)}>
             {label}
           </h2>
         )}
 
         {body && (
-          <p className={cn('md:text-lg', contentFont)}>
+          <p className={cn('text-lg md:text-xl lg:text-2xl whitespace-pre-line', contentFont)}>
             {body}
           </p>
         )}
 
         {urlLabel && url && (
-          <h2 className={cn('md:text-lg py-10', ctaFontWeight, contentFont)}>
+          <h2 className={cn('md:text-lg lg:text-2xl py-10', ctaFontWeight, contentFont)}>
             <a href={url} target="_blank" rel="noreferrer" style={{color: contentColor}}>
               <span className={cn('nav-underline-dual', urlTextItalic && 'italic')}>
                 {urlLabel}

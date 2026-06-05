@@ -51,6 +51,9 @@ export const SCROLLABLE_IMAGE_FRAGMENT = `#graphql
     textAlignment: field(key: "text_alignment") {
       value
     }
+    contentAlignment: field(key: "content_alignment") {
+      value
+    }
     header: field(key: "header") {
       value
     }

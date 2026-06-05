@@ -22,6 +22,15 @@ export const BODY_INFO_FRAGMENT = `#graphql
         }
       }
     }
+    featuredImages: field(key: "featured_images") {
+      references(first: 10) {
+        nodes {
+          ... on MediaImage {
+            ...Image
+          }
+        }
+      }
+    }
     featuredVideo: field(key: "video") {
       reference {
         ... on Video {
@@ -86,6 +95,28 @@ export const BODY_INFO_FRAGMENT = `#graphql
     }
     brandDescription: field(key: "brand_description") {
       value
+    }
+    sectionImage: field(key: "section_image") {
+      reference {
+        ... on MediaImage {
+          ...Image
+        }
+      }
+    }
+    certLogos: field(key: "cert_logos") {
+      references(first: 10) {
+        nodes {
+          ... on MediaImage {
+            id
+            image {
+              url
+              altText
+              width
+              height
+            }
+          }
+        }
+      }
     }
     textUrl: field(key: "text_url") {
       value

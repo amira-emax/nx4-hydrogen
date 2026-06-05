@@ -309,3 +309,35 @@
   gap: 0.75rem;
   flex-wrap: wrap;
 }
+
+.nav-underline-dual {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, translate, scale, rotate, filter, backdrop-filter;
+  transition-timing-function: var(--tw-ease, ease);
+  transition-duration: var(--tw-duration, 150ms);
+}
+.nav-underline-dual::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+}
+.nav-underline-dual::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+.nav-underline-dual:hover::after {
+  width: 100%;
+}
+

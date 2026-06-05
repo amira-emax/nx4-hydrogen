@@ -2,9 +2,31 @@ import {Image} from '@shopify/hydrogen';
 import {useEffect, useRef} from 'react';
 import {cn} from '~/lib/utils';
 
+function parseRichText(value?: string): string {
+  if (!value) return '';
+  try {
+    const ast = JSON.parse(value);
+    const extract = (node: any): string => {
+      if (node.type === 'text') return node.value || '';
+      if (Array.isArray(node.children)) {
+        const sep = node.type === 'root' ? '\n' : '';
+        return node.children.map(extract).join(sep);
+      }
+      return '';
+    };
+    return extract(ast);
+  } catch {
+    return value;
+  }
+}
+
 interface ImageBlockNode {
   id: string;
-  brandImage?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
+  brandImage?: {
+    reference?: {
+      image?: {url: string; altText?: string; width?: number; height?: number};
+    };
+  };
   text?: {value?: string};
   textPosition?: {value?: string};
 }
@@ -12,13 +34,21 @@ interface ImageBlockNode {
 export interface IntroductionFragment {
   id: string;
   type: string;
-  bgImage?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
+  bgImage?: {
+    reference?: {
+      image?: {url: string; altText?: string; width?: number; height?: number};
+    };
+  };
   bgOverlay?: {value?: string};
   heroHeaderTop?: {value?: string};
   headerTopColorType?: {value?: string};
   headerTopColor?: {value?: string};
   headerTopGradient?: {value?: string};
-  heroImage?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
+  heroImage?: {
+    reference?: {
+      image?: {url: string; altText?: string; width?: number; height?: number};
+    };
+  };
   heroImageOverlay?: {value?: string};
   imageSize?: {value?: string};
   imgPaddingTop?: {value?: string};
@@ -80,7 +110,7 @@ export function Introduction({reference}: IntroductionProps) {
 
   const bgImage = reference.bgImage?.reference?.image;
   const bgOverlay = reference.bgOverlay?.value;
-  const heroHeaderTop = reference.heroHeaderTop?.value;
+  const heroHeaderTop = parseRichText(reference.heroHeaderTop?.value);
   const headerTopColorType = reference.headerTopColorType?.value || 'solid';
   const headerTopColor = reference.headerTopColor?.value || '#000000';
   const headerTopGradient = reference.headerTopGradient?.value;
@@ -91,12 +121,12 @@ export function Introduction({reference}: IntroductionProps) {
   const imgPaddingBottom = reference.imgPaddingBottom?.value || '0';
   const layout = reference.layout?.value || 'image_first';
   const textAlign = reference.textAlign?.value || 'text-start';
-  const heroHeader = reference.heroHeader?.value;
+  const heroHeader = parseRichText(reference.heroHeader?.value);
   const headerColorType = reference.headerColorType?.value || 'solid';
   const headerColor = reference.headerColor?.value || '#000000';
   const headerGradient = reference.headerGradient?.value;
   const heroLabel = reference.heroLabel?.value;
-  const heroDescription = reference.heroDescription?.value;
+  const heroDescription = parseRichText(reference.heroDescription?.value);
   const urlLabel = reference.urlLabel?.value;
   const url = reference.url?.value;
   const contentColor = reference.contentColor?.value || '#333333';
@@ -106,12 +136,15 @@ export function Introduction({reference}: IntroductionProps) {
   const gridHeadingAlign = reference.gridHeadingAlign?.value || 'text-left';
   const imageAspect = reference.imageAspect?.value || 'aspect-square';
   const showOverlay = reference.overlay?.value === 'true';
-  const overlayColor = reference.overlayColor?.value || 'linear-gradient(0deg, #4F3012 0%, rgba(59, 44, 23, 0) 33%)';
+  const overlayColor =
+    reference.overlayColor?.value ||
+    'linear-gradient(0deg, #4F3012 0%, rgba(59, 44, 23, 0) 33%)';
   const showTextShadow = reference.textShadow?.value === 'true';
-  const bottomHeader = reference.bottomHeader?.value;
+  const bottomHeader = parseRichText(reference.bottomHeader?.value);
   const bottomDescription = reference.bottomDescription?.value;
   const bottomDescPaddingTop = reference.bottomDescPaddingTop?.value || '80';
-  const bottomDescPaddingBottom = reference.bottomDescPaddingBottom?.value || '80';
+  const bottomDescPaddingBottom =
+    reference.bottomDescPaddingBottom?.value || '80';
   const imageBlocks = reference.imageBlocks?.references?.nodes || [];
 
   const hasTextContent = heroHeader || heroLabel || heroDescription;
@@ -136,7 +169,6 @@ export function Introduction({reference}: IntroductionProps) {
 
   return (
     <>
-      <div className="h-16 lg:hidden" />
       <section>
         <div
           className="relative justify-center mx-auto"
@@ -152,15 +184,15 @@ export function Introduction({reference}: IntroductionProps) {
         >
           {bgOverlay && (
             <div
-              className="absolute inset-0 pointer-events-none"
+              className="absolute inset-0 pointer-events-none z-1"
               style={{background: bgOverlay}}
             />
           )}
 
           {heroHeaderTop && (
-            <div className={cn('w-full px-20 pt-30', textAlign)}>
+            <div className={cn('relative z-2 w-full px-20 pt-30', textAlign)}>
               <h1
-                className="text-4xl md:text-5xl lg:text-6xl font-domaine-text leading-tight"
+                className="text-4xl md:text-5xl lg:text-6xl  leading-tight"
                 style={headerTopStyle}
               >
                 {heroHeaderTop}
@@ -171,9 +203,9 @@ export function Introduction({reference}: IntroductionProps) {
           <div
             className={cn(
               layout === 'center'
-                ? 'relative flex items-center justify-center'
+                ? 'relative z-2 flex items-center justify-center'
                 : cn(
-                    'flex flex-col md:flex-row items-center',
+                    'relative z-2 flex flex-col md:flex-row items-center',
                     layout === 'text_first' && 'md:flex-row-reverse',
                   ),
             )}
@@ -217,7 +249,7 @@ export function Introduction({reference}: IntroductionProps) {
                 <div>
                   {heroHeader && (
                     <h1
-                      className="leading-tight text-4xl md:text-5xl lg:text-6xl font-domaine-text"
+                      className="leading-tight text-3xl md:text-4xl lg:text-5xl  whitespace-pre-line"
                       style={headerStyle}
                     >
                       {heroHeader}
@@ -225,7 +257,7 @@ export function Introduction({reference}: IntroductionProps) {
                   )}
                   {heroLabel && (
                     <h3
-                      className="text-xl lg:text-2xl font-domaine-text"
+                      className="text-xl lg:text-2xl "
                       style={{color: contentColor}}
                     >
                       {heroLabel}
@@ -233,29 +265,27 @@ export function Introduction({reference}: IntroductionProps) {
                   )}
                   {heroDescription && (
                     <h3
-                      className="text-xl lg:text-2xl font-domaine-sans"
+                      className="pt-2 text-xl lg:text-2xl font-light  whitespace-pre-line"
                       style={{color: contentColor}}
                     >
                       {heroDescription}
                     </h3>
                   )}
-                  {urlLabel && url && (
+                  <div className="py-20"></div>
+                  {urlLabel && (
                     <h3
+                      style={{color: contentColor}}
                       className={cn(
-                        'md:text-xl lg:text-2xl font-domaine-sans',
-                        layout === 'center' ? 'py-5' : 'py-10',
+                        'md:text-xl lg:text-2xl ',
+                        layout === 'center' ? 'py-15' : 'py-10',
                       )}
                     >
-                      <a
-                        href={url}
-                        className="nav-underline-dual"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <span className="nav-underline-dual" style={headerStyle}>
-                          {urlLabel}
-                        </span>
-                      </a>
+                      {urlLabel}
+                      <span>
+                        <div className="flex justify-center ">
+                          <div className="w-0.5 h-20 bg-white opacity-30" />
+                        </div>
+                      </span>
                     </h3>
                   )}
                 </div>
@@ -272,7 +302,7 @@ export function Introduction({reference}: IntroductionProps) {
             >
               {gridLabel && (
                 <p
-                  className="text-lg md:text-xl font-domaine-sans"
+                  className="text-lg md:text-xl "
                   style={{color: gridTextColor}}
                 >
                   {gridLabel}
@@ -280,7 +310,7 @@ export function Introduction({reference}: IntroductionProps) {
               )}
               {gridTitle && (
                 <h2
-                  className="text-2xl md:text-4xl font-domaine-text"
+                  className="text-2xl md:text-4xl "
                   style={{color: gridTextColor}}
                 >
                   {gridTitle}
@@ -292,15 +322,17 @@ export function Introduction({reference}: IntroductionProps) {
           {imageBlocks.length > 0 && (
             <div
               className={cn(
+                'relative z-2',
                 layout === 'center' &&
                   'md:absolute inset-0 flex items-end justify-center pointer-events-none',
               )}
             >
-              <div className="flex flex-col md:flex-row gap-6 md:gap-30 px-15 md:px-25 items-center justify-center w-full">
+              <div className="flex flex-col md:flex-row gap-6 md:gap-10 px-15 md:px-40 items-center justify-center w-full">
                 {imageBlocks.map((block, idx) => {
                   const blockImage = block.brandImage?.reference?.image;
                   const blockText = block.text?.value;
-                  const blockTextPosition = block.textPosition?.value || 'center';
+                  const blockTextPosition =
+                    block.textPosition?.value || 'center';
 
                   return (
                     <div
@@ -343,7 +375,7 @@ export function Introduction({reference}: IntroductionProps) {
                           <div className="w-full text-center">
                             <span
                               className={cn(
-                                'text-xl md:text-2xl font-domaine-text',
+                                'text-xl md:text-3xl  italic',
                                 showTextShadow && 'text-shadow-lg',
                               )}
                             >
@@ -359,35 +391,36 @@ export function Introduction({reference}: IntroductionProps) {
             </div>
           )}
 
-          {(bottomHeader || bottomDescription) && (
-            <div
-              className="w-full relative z-10"
-              style={{
-                paddingTop: `${bottomDescPaddingTop}px`,
-                paddingBottom: `${bottomDescPaddingBottom}px`,
-              }}
-            >
-              <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-                {bottomHeader && (
-                  <h3
-                    className="text-2xl md:text-4xl mb-4 font-domaine-text"
-                    style={headerStyle}
-                  >
-                    {bottomHeader}
-                  </h3>
-                )}
-                {bottomDescription && (
-                  <p
-                    className="max-w-3xl mx-auto md:text-lg font-domaine-sans"
-                    style={{color: contentColor}}
-                  >
-                    {bottomDescription}
-                  </p>
-                )}
-              </div>
-            </div>
-          )}
         </div>
+
+        {(bottomHeader || bottomDescription) && (
+          <div
+            className="w-full bg-black"
+            style={{
+              paddingTop: `${bottomDescPaddingTop}px`,
+              paddingBottom: `${bottomDescPaddingBottom}px`,
+            }}
+          >
+            <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+              {bottomHeader && (
+                <h3
+                  className="text-2xl md:text-4xl mb-4 "
+                  style={headerStyle}
+                >
+                  {bottomHeader}
+                </h3>
+              )}
+              {bottomDescription && (
+                <p
+                  className="mx-auto text-lg lg:text-2xl italic"
+                  style={{color: '#C3C3C3BF'}}
+                >
+                  {bottomDescription}
+                </p>
+              )}
+            </div>
+          </div>
+        )}
       </section>
     </>
   );

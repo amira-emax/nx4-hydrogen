@@ -19,6 +19,16 @@ export const PROMOTION_PAGE_CMS_QUERY = `#graphql
     promotionPage: metaobject(handle: {handle: $handle, type: "promotion_page"}) {
       id
       handle
+      topLogo: field(key: "top_logo") {
+        reference {
+          ... on MediaImage {
+            ...Image
+          }
+        }
+      }
+      topLabel: field(key: "top_label") {
+        value
+      }
       modules: field(key: "modules") {
         references(first: 20) {
           nodes {

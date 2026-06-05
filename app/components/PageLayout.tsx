@@ -1,7 +1,7 @@
 import {X} from 'lucide-react';
 import {AnimatePresence} from 'motion/react';
 import {Suspense, useEffect, useRef, useState} from 'react';
-import {Await, Link, useLocation} from 'react-router';
+import {Await, Link, useLocation, useMatches} from 'react-router';
 import type {CartApiQueryFragment, HeaderQuery} from 'storefrontapi.generated';
 import type {
   FooterMenuCmsQuery,
@@ -51,6 +51,9 @@ export function PageLayout({
   const [isContentVisible, setIsContentVisible] = useState(true);
 
   const [isMobile, setIsMobile] = useState(false);
+
+  const matches = useMatches();
+  const isLandingPage = matches.some((m: any) => m.handle?.isLandingPage);
 
   const location = useLocation();
   const isSolidHeader =
@@ -142,7 +145,7 @@ export function PageLayout({
       />
       <main className="relative">
         <div ref={contentRef} className="bg-background min-h-dvh relative z-10">
-          {header && (
+          {!isLandingPage && header && (
             <Header
               header={header}
               globalDesktopHeader={globalDesktopHeader}
@@ -155,20 +158,26 @@ export function PageLayout({
           )}
           {children}
         </div>
-        <div
-          className="pointer-events-none"
-          style={{height: showStatic ? 0 : footerHeight}}
-        />
-        <Footer
-          footerRef={footerRef}
-          className={footerClass}
-          footer={footer}
-          header={header}
-          publicStoreDomain={publicStoreDomain}
-        />
+        {!isLandingPage && (
+          <>
+            <div
+              className="pointer-events-none"
+              style={{height: showStatic ? 0 : footerHeight}}
+            />
+            <Footer
+              footerRef={footerRef}
+              className={footerClass}
+              footer={footer}
+              header={header}
+              publicStoreDomain={publicStoreDomain}
+            />
+          </>
+        )}
         <CookieBanner />
       </main>
-      <NewsletterPopup globalNewsletterPopupPromise={globalNewsletterPopup} />
+      {!isLandingPage && (
+        <NewsletterPopup globalNewsletterPopupPromise={globalNewsletterPopup} />
+      )}
     </SheetProvider>
   );
 }
