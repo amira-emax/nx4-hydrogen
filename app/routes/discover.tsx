@@ -37,7 +37,7 @@ export default function PromotionPage() {
   return (
     <div className="promotion relative">
       <div className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 pointer-events-none">
-        <div className="pointer-events-auto">
+        <div className="pointer-events-auto opacity-70">
           {topLogo ? (
             <img src={topLogo.url} alt={topLogo.altText || ''} className="h-8 md:h-15 lg:h-20 w-auto object-contain" />
           ) : (
@@ -45,7 +45,7 @@ export default function PromotionPage() {
           )}
         </div>
         {topLabel && (
-          <span className="pointer-events-auto text-white text-sm md:text-lg lg:text-xl font-light font-imagefuture tracking-widest">
+          <span className="pointer-events-auto opacity-70 text-white text-sm md:text-lg lg:text-xl font-light font-imagefuture tracking-widest">
             {topLabel}
           </span>
         )}
