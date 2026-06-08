@@ -271,7 +271,7 @@ export function Introduction({reference}: IntroductionProps) {
                       {heroDescription}
                     </h3>
                   )}
-                  <div className="py-20"></div>
+                  <div className="py-20 lg:py-33"></div>
                   {urlLabel && (
                     <h3
                       style={{color: contentColor}}
