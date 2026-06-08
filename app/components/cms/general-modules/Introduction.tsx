@@ -192,7 +192,7 @@ export function Introduction({reference}: IntroductionProps) {
           {heroHeaderTop && (
             <div className={cn('relative z-2 w-full px-20 pt-30', textAlign)}>
               <h1
-                className="text-4xl md:text-5xl lg:text-6xl  leading-tight"
+                className="text-4xl md:text-5xl lg:text-6xl leading-tight"
                 style={headerTopStyle}
               >
                 {heroHeaderTop}
@@ -276,14 +276,14 @@ export function Introduction({reference}: IntroductionProps) {
                     <h3
                       style={{color: contentColor}}
                       className={cn(
-                        'md:text-xl lg:text-2xl ',
-                        layout === 'center' ? 'py-15' : 'py-10',
+                        'lg:text-lg font-imagefuture font-normal tracking-widest',
+                        layout === 'center' ? 'pt-20 pb-5' : 'pt-10 pb-3',
                       )}
                     >
                       {urlLabel}
                       <span>
-                        <div className="flex justify-center ">
-                          <div className="w-0.5 h-20 bg-white opacity-30" />
+                        <div className="flex justify-center">
+                          <div className="h-30" style={{width: '1px', background: 'linear-gradient(180deg, #FFFFFF 40.38%, #090909 100%)'}} />
                         </div>
                       </span>
                     </h3>
@@ -324,7 +324,7 @@ export function Introduction({reference}: IntroductionProps) {
               className={cn(
                 'relative z-2',
                 layout === 'center' &&
-                  'md:absolute inset-0 flex items-end justify-center pointer-events-none',
+                  'absolute inset-0 flex items-end justify-center pointer-events-none',
               )}
             >
               <div className="flex flex-col md:flex-row gap-6 md:gap-10 px-15 md:px-40 items-center justify-center w-full">
@@ -375,7 +375,7 @@ export function Introduction({reference}: IntroductionProps) {
                           <div className="w-full text-center">
                             <span
                               className={cn(
-                                'text-xl md:text-3xl  italic',
+                                'text-xl md:text-2xl italic font-imagefuture font-normal tracking-wide',
                                 showTextShadow && 'text-shadow-lg',
                               )}
                             >
@@ -412,7 +412,7 @@ export function Introduction({reference}: IntroductionProps) {
               )}
               {bottomDescription && (
                 <p
-                  className="mx-auto text-lg lg:text-2xl italic"
+                  className="mx-auto text-lg lg:text-xl font-imagefuture font-normal"
                   style={{color: '#C3C3C3BF'}}
                 >
                   {bottomDescription}

@@ -60,7 +60,13 @@ export const SCROLLABLE_IMAGE_FRAGMENT = `#graphql
     label: field(key: "label") {
       value
     }
+    labelFontSize: field(key: "label_font_size") {
+      value
+    }
     body: field(key: "body") {
+      value
+    }
+    bodyFontWeight: field(key: "body_font_weight") {
       value
     }
     urlLabel: field(key: "url_label") {

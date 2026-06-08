@@ -45,7 +45,7 @@ export default function PromotionPage() {
           )}
         </div>
         {topLabel && (
-          <span className="pointer-events-auto text-white text-sm md:text-lg lg:text-2xl font-extralight tracking-wide">
+          <span className="pointer-events-auto text-white text-sm md:text-lg lg:text-xl font-light font-imagefuture tracking-widest">
             {topLabel}
           </span>
         )}

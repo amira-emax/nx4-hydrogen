@@ -44,7 +44,9 @@ export interface ScrollableImageFragment {
   contentAlignment?: {value?: string};
   header?: {value?: string};
   label?: {value?: string};
+  labelFontSize?: {value?: string};
   body?: {value?: string};
+  bodyFontWeight?: {value?: string};
   urlLabel?: {value?: string};
   url?: {value?: string};
   urlTextItalic?: {value?: string};
@@ -64,8 +66,9 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
   const bgFix = reference.bgFix?.value === 'true';
   const sectionHeight = reference.sectionHeight?.value || '50';
   const textFade = reference.textFade?.value === 'true';
-  const contentFont = reference.contentFont?.value || 'font-image-future';
-  const headerFont = reference.headerFont?.value || contentFont;
+  const contentFont = reference.contentFont?.value || 'font-imagefuture';
+  const headertext = 'text-lg md:text-2xl lg:text-3xl';
+  const headerFont = reference.headerFont?.value || contentFont + ' ' + headertext;
   const headerColorType = reference.headerColorType?.value || 'solid';
   const headerColor = reference.headerColor?.value || '#000000';
   const headerGradient = reference.headerGradient?.value;
@@ -75,7 +78,9 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
   const contentAlignment = reference.contentAlignment?.value || 'left';
   const header = reference.header?.value;
   const label = reference.label?.value;
+  const labelFontSize = reference.labelFontSize?.value || 'text-xl md:text-2xl lg:text-3xl';
   const body = parseRichText(reference.body?.value);
+  const bodyFontWeight = reference.bodyFontWeight?.value ||'font-normal';
   const urlLabel = reference.urlLabel?.value;
   const url = reference.url?.value;
   const urlTextItalic = reference.urlTextItalic?.value === 'true';
@@ -150,7 +155,7 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
       >
         {header && (
           <h2
-            className={cn('mb-2 text-lg md:text-2xl lg:text-3xl', headerFont)}
+            className={cn('mb-2 ', headerFont)}
             style={headerStyle}
           >
             {header}
@@ -158,21 +163,21 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
         )}
 
         {label && (
-          <h2 className={cn('mb-2 text-xl md:text-3xl lg:text-4xl font-bold', contentFont)}>
+          <h2 className={cn('mb-2 font-medium',labelFontSize, contentFont)}>
             {label}
           </h2>
         )}
 
         {body && (
-          <p className={cn('text-lg md:text-xl lg:text-2xl whitespace-pre-line', contentFont)}>
+          <p className={cn('text-lg lg:text-xl whitespace-pre-line', contentFont, bodyFontWeight)}>
             {body}
           </p>
         )}
 
         {urlLabel && url && (
-          <h2 className={cn('md:text-lg lg:text-2xl py-10', ctaFontWeight, contentFont)}>
+          <h2 className={cn('md:text-base lg:text-lg py-10')}>
             <a href={url} target="_blank" rel="noreferrer" style={{color: contentColor}}>
-              <span className={cn('nav-underline-dual', urlTextItalic && 'italic')}>
+              <span className={cn('nav-underline-dual', urlTextItalic && 'italic', ctaFontWeight, contentFont)}>
                 {urlLabel}
               </span>
             </a>

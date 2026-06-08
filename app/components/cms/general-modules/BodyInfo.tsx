@@ -52,7 +52,14 @@ export interface BodyInfoFragment {
   };
   featuredImages?: {
     references?: {
-      nodes: {image?: {url: string; altText?: string; width?: number; height?: number}}[];
+      nodes: {
+        image?: {
+          url: string;
+          altText?: string;
+          width?: number;
+          height?: number;
+        };
+      }[];
     };
   };
   featuredVideo?: {reference?: {id?: string; sources?: VideoSource[]}};
@@ -80,6 +87,7 @@ export interface BodyInfoFragment {
   brandSubHeader?: {value?: string};
   brandDescription?: {value?: string};
   certLogos?: {references?: {nodes: CertLogoNode[]}};
+  certText?: {value?: string};
   textUrl?: {value?: string};
   linkUrl?: {value?: string};
   urlLabelItalic?: {value?: string};
@@ -99,12 +107,22 @@ export function BodyInfo({reference}: BodyInfoProps) {
   const featuredImage = reference.featuredImage?.reference?.image;
   const featuredImages = (reference.featuredImages?.references?.nodes || [])
     .map((n) => n.image)
-    .filter((img): img is {url: string; altText?: string; width?: number; height?: number} => !!img);
-  const slideImages = featuredImages.length > 0
-    ? featuredImages
-    : featuredImage
-      ? [featuredImage]
-      : [];
+    .filter(
+      (
+        img,
+      ): img is {
+        url: string;
+        altText?: string;
+        width?: number;
+        height?: number;
+      } => !!img,
+    );
+  const slideImages =
+    featuredImages.length > 0
+      ? featuredImages
+      : featuredImage
+        ? [featuredImage]
+        : [];
   const featuredVideoSources =
     reference.featuredVideo?.reference?.sources || [];
 
@@ -117,8 +135,8 @@ export function BodyInfo({reference}: BodyInfoProps) {
   const subTitle = reference.subTitle?.value;
   const description = reference.description?.value;
   const caption = reference.caption?.value;
-  const headerFont = reference.headerFont?.value || 'font-canela';
-  const contentFont = reference.contentFont?.value || 'font-gt-america';
+  const headerFont = reference.headerFont?.value || 'font-imagefuture';
+  const contentFont = reference.contentFont?.value || 'font-imagefuture ';
   const headerColorType = reference.headerColorType?.value || 'gradient';
   const headerColor = reference.headerColor?.value || '#000000';
   const headerGradient =
@@ -134,6 +152,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
   const urlLabelItalic = reference.urlLabelItalic?.value === 'true';
   const sectionImage = reference.sectionImage?.reference?.image;
   const certLogos = reference.certLogos?.references?.nodes || [];
+  const certText = reference.certText?.value;
   const mediaItemHeight = reference.mediaItemHeight?.value || 'aspect-square';
   const mediaBlocks = reference.mediaBlocks?.references?.nodes || [];
 
@@ -227,7 +246,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
           >
             {/* Text content */}
             <div className="flex items-start justify-center h-full py-10">
-              <div className="md:col-span-2 flex flex-col justify-center mt-6 md:mt-0">
+              <div className="md:col-span-2 flex flex-col h-full mt-6 md:mt-0">
                 <div
                   ref={headerRef}
                   className="px-10"
@@ -260,13 +279,19 @@ export function BodyInfo({reference}: BodyInfoProps) {
                   )}
                 </div>
 
-                <div ref={descRef} className="px-10 py-10 ">
+                <div ref={descRef} className="px-10 py-10 mt-auto">
                   {description && (
-                    <p className={cn('mb-4 md:text-lg lg:text-2xl', contentFont)}>{description}</p>
+                    <div  className={cn('pt-30')}>
+                      <p className={cn('mb-4 lg:text-lg', contentFont)}>
+                        {description}
+                      </p>
+                    </div>
                   )}
                   {caption && (
-                    <div className={cn('py-20', contentFont)}>
-                      <p className="md:text-lg lg:text-2xl font-semibold">{caption}</p>
+                    <div className={cn('py-10')}>
+                      <p className={cn('md:text-lg lg:text-xl font-medium italic', contentFont)} >
+                        {caption}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -289,7 +314,6 @@ export function BodyInfo({reference}: BodyInfoProps) {
                         )}
                       />
                     ))}
-                    
                   </>
                 ) : featuredVideoSources.length > 0 ? (
                   <video
@@ -319,65 +343,70 @@ export function BodyInfo({reference}: BodyInfoProps) {
             />
           </div>
         )}
-        
 
         {/* Brand / content section */}
-        {(brandHeader || brandSubHeader || brandDescription || (textUrl && linkUrl)) && (
-        <div className="pt-10 md:pt-20">
-          <div
-            className="px-6"
-            style={{paddingBlock: `${sectionContentPadding}rem`}}
-          >
-            {brandHeader && (
-              <div className="text-center">
+        {(brandHeader ||
+          brandSubHeader ||
+          brandDescription ||
+          (textUrl && linkUrl)) && (
+          <div className="pt-10 md:pt-20">
+            <div
+              className="px-6"
+              style={{paddingBlock: `${sectionContentPadding}rem`}}
+            >
+              {brandHeader && (
+                <div className="text-center">
+                  <h2
+                    className={cn(
+                      'text-xl md:text-2xl font-semibold mb-4',
+                      headerFont,
+                    )}
+                    style={brandHeaderStyle}
+                  >
+                    {brandHeader}
+                  </h2>
+                </div>
+              )}
+              {brandSubHeader && (
                 <h2
-                  className={cn('text-2xl md:text-3xl font-semibold', headerFont)}
-                  style={brandHeaderStyle}
-                >
-                  {brandHeader}
-                </h2>
-              </div>
-            )}
-            {brandSubHeader && (
-              <h2
-                className={cn(
-                  'md:text-2xl font-normal mt-12 mb-4 text-center',
-                  contentFont,
-                )}
-              >
-                {brandSubHeader}
-              </h2>
-            )}
-            {brandDescription && (
-              <h2
-                className={cn(
-                  'md:text-lg font-light lg:mb-12 text-center lg:px-65 whitespace-pre-line',
-                  contentFont,
-                )}
-              >
-                {brandDescription}
-              </h2>
-            )}
-            {textUrl && linkUrl && (
-              <h2 className="md:text-lg font-normal mb-5 lg:mb-12 text-center">
-                <a
-                  href={linkUrl}
                   className={cn(
-                    'nav-underline-dual',
+                    'md:text-xl lg:text-2xl font-normal mt-12 mb-4 text-center',
                     contentFont,
-                    urlLabelItalic && 'italic',
                   )}
                 >
-                  {textUrl}
-                </a>
-              </h2>
-            )}
+                  {brandSubHeader}
+                </h2>
+              )}
+              {brandDescription && (
+                <h2
+                  className={cn(
+                    'md:text-lg font-light lg:mb-12 text-center whitespace-pre-line',
+                    contentFont,
+                  )}
+                >
+                  {brandDescription}
+                </h2>
+              )}
+              {textUrl && linkUrl && (
+                <h2 className="md:text-lg font-normal mb-5 lg:mb-12 text-center">
+                  <a
+                    href={linkUrl}
+                    className={cn(
+                      'nav-underline-dual',
+                      contentFont,
+                      urlLabelItalic && 'italic',
+                    )}
+                  >
+                    {textUrl}
+                  </a>
+                </h2>
+              )}
+            </div>
           </div>
-        </div>
         )}
 
         {certLogos.length > 0 && (
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-xs mx-auto">
             <div
               className="px-6"
               style={{paddingBlock: `${sectionContentPadding}rem`}}
@@ -388,12 +417,17 @@ export function BodyInfo({reference}: BodyInfoProps) {
                     <Image
                       key={logo.id}
                       data={logo.image}
-                      className="h-16 md:h-25 w-auto object-contain"
+                      className="h-16 md:h-20 w-auto object-contain"
                       sizes="80px"
                     />
                   ) : null,
                 )}
               </div>
+              {certText && (
+                <p className={cn('mt-4 text-center text-sm md:text-base font-light tracking-widest', contentFont)} style={{color: contentColor}}>
+                  {certText}
+                </p>
+              )}
             </div>
           </div>
         )}

@@ -118,6 +118,9 @@ export const BODY_INFO_FRAGMENT = `#graphql
         }
       }
     }
+    certText: field(key: "cert_text") {
+      value
+    }
     textUrl: field(key: "text_url") {
       value
     }
