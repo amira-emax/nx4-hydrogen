@@ -2,6 +2,24 @@ import {Image} from '@shopify/hydrogen';
 import {useEffect, useRef, useState} from 'react';
 import {cn} from '~/lib/utils';
 
+function parseRichText(value?: string): string {
+  if (!value) return '';
+  try {
+    const ast = JSON.parse(value);
+    const extract = (node: any): string => {
+      if (node.type === 'text') return node.value || '';
+      if (Array.isArray(node.children)) {
+        const sep = node.type === 'root' ? '\n' : '';
+        return node.children.map(extract).join(sep);
+      }
+      return '';
+    };
+    return extract(ast);
+  } catch {
+    return value;
+  }
+}
+
 interface VideoSource {
   url: string;
   mimeType: string;
@@ -110,7 +128,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
   const sectionContentPadding = reference.sectionContentPadding?.value || '0';
   const brandHeader = reference.brandHeader?.value;
   const brandSubHeader = reference.brandSubHeader?.value;
-  const brandDescription = reference.brandDescription?.value;
+  const brandDescription = parseRichText(reference.brandDescription?.value);
   const textUrl = reference.textUrl?.value;
   const linkUrl = reference.linkUrl?.value;
   const urlLabelItalic = reference.urlLabelItalic?.value === 'true';
@@ -118,6 +136,8 @@ export function BodyInfo({reference}: BodyInfoProps) {
   const certLogos = reference.certLogos?.references?.nodes || [];
   const mediaItemHeight = reference.mediaItemHeight?.value || 'aspect-square';
   const mediaBlocks = reference.mediaBlocks?.references?.nodes || [];
+
+  const body = parseRichText(reference.body?.value);
 
   useEffect(() => {
     const cleanups: (() => void)[] = [];
@@ -331,7 +351,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
             {brandDescription && (
               <h2
                 className={cn(
-                  'md:text-lg font-light lg:mb-12 text-center lg:px-65',
+                  'md:text-lg font-light lg:mb-12 text-center lg:px-65 whitespace-pre-line',
                   contentFont,
                 )}
               >
