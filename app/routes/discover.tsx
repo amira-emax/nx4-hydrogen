@@ -1,13 +1,13 @@
 import {useLoaderData} from 'react-router';
 import ModuleRenderer from '~/components/cms/general-modules/ModuleRenderer';
 import {PROMOTION_PAGE_CMS_QUERY} from '~/graphql/cms/query/PromotionPageQuery';
-import type {Route} from './+types/promotion';
+import type {Route} from './+types/discover';
 import type {PromotionPageCmsQuery} from 'types/storefrontapi.generated';
 
 export const handle = {isLandingPage: true};
 
 export const meta: Route.MetaFunction = () => {
-  return [{title: 'Promotion | NX4 Bird Nest'}];
+  return [{title: 'Discover | NX4 Bird Nest'}];
 };
 
 export async function loader(args: Route.LoaderArgs) {
