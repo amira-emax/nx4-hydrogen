@@ -406,7 +406,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
         )}
 
         {certLogos.length > 0 && (
-          <div className="max-w-xs md:max-w-2xl mx-auto pt-10 md:pt-0">
+          <div className={cn(certLogos.length > 2 ? 'max-w-xs md:max-w-2xl' : 'max-w-xs', 'mx-auto pt-10 md:pt-0')}>
             <div
               className="px-6"
               style={{paddingBlock: `${sectionContentPadding}rem`}}
