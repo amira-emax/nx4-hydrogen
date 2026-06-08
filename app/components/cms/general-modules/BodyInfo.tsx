@@ -358,7 +358,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
                 <div className="text-center">
                   <h2
                     className={cn(
-                      'text-xl md:text-2xl font-semibold mb-4',
+                      'text-xl md:text-2xl font-medium mb-4',
                       headerFont,
                     )}
                     style={brandHeaderStyle}
