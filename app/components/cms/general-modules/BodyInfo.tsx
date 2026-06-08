@@ -380,7 +380,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
               {brandDescription && (
                 <h2
                   className={cn(
-                    'md:text-lg font-light lg:mb-12 text-center whitespace-pre-line',
+                    'text-xs md:text-lg font-light lg:mb-12 text-center whitespace-pre-line',
                     contentFont,
                   )}
                 >
@@ -417,7 +417,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
                     <Image
                       key={logo.id}
                       data={logo.image}
-                      className="h-16 md:h-20 w-auto object-contain"
+                      className="h-12 md:h-20 w-auto object-contain"
                       sizes="80px"
                     />
                   ) : null,

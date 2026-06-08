@@ -271,19 +271,19 @@ export function Introduction({reference}: IntroductionProps) {
                       {heroDescription}
                     </h3>
                   )}
-                  <div className="py-20 lg:py-33"></div>
+                  <div className="md:py-20 lg:py-33"></div>
                   {urlLabel && (
                     <h3
                       style={{color: contentColor}}
                       className={cn(
-                        'lg:text-lg font-imagefuture font-normal tracking-widest',
-                        layout === 'center' ? 'pt-20 pb-5' : 'pt-10 pb-3',
+                        'text-xs md:text-base lg:text-lg font-imagefuture font-normal tracking-widest',
+                        layout === 'center' ? 'pt-10 md:pt-20 pb-5' : 'pt-10 pb-3',
                       )}
                     >
                       {urlLabel}
                       <span>
-                        <div className="flex justify-center">
-                          <div className="h-30" style={{width: '1px', background: 'linear-gradient(180deg, #FFFFFF 40.38%, #090909 100%)'}} />
+                        <div className="flex justify-center mt-2 md:mt-0">
+                          <div className="h-15 md:h-30" style={{width: '1px', background: 'linear-gradient(180deg, #FFFFFF 40.38%, #090909 100%)'}} />
                         </div>
                       </span>
                     </h3>
@@ -324,7 +324,7 @@ export function Introduction({reference}: IntroductionProps) {
               className={cn(
                 'relative z-2',
                 layout === 'center' &&
-                  'absolute inset-0 flex items-end justify-center pointer-events-none',
+                  'md:absolute md:inset-0 md:flex md:items-end md:justify-center pointer-events-none',
               )}
             >
               <div className="flex flex-col md:flex-row gap-6 md:gap-10 px-15 md:px-40 items-center justify-center w-full">
