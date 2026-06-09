@@ -13,14 +13,15 @@ export default {
     executionContext: ExecutionContext,
   ): Promise<Response> {
     try {
-      // Subdomain redirects — add new ones following the same pattern
+      // Subdomain rewrites — serves the route content while keeping the subdomain URL
       const url = new URL(request.url);
       const host = url.hostname;
       const subdomainRoutes: Record<string, string> = {
         'discover.dailynx4.com': '/discover',
       };
-      if (subdomainRoutes[host]) {
-        return Response.redirect(`https://dailynx4.com${subdomainRoutes[host]}`, 301);
+      if (subdomainRoutes[host] && url.pathname === '/') {
+        const rewrittenUrl = new URL(subdomainRoutes[host], request.url);
+        request = new Request(rewrittenUrl.toString(), request);
       }
 
       const hydrogenContext = await createHydrogenRouterContext(
