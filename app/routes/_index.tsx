@@ -15,8 +15,6 @@ export const meta: Route.MetaFunction = ({data}) => {
   return [{title: 'NX4 Bird Nest'}];
 };
 
-export const handle = ({data}: {data: {page?: string}}) =>
-  data?.page === 'discover' ? {isLandingPage: true} : {};
 
 export async function loader({request, context}: Route.LoaderArgs) {
   const host = new URL(request.url).hostname;

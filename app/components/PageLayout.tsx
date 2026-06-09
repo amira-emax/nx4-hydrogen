@@ -1,7 +1,7 @@
 import {X} from 'lucide-react';
 import {AnimatePresence} from 'motion/react';
 import {Suspense, useEffect, useRef, useState} from 'react';
-import {Await, Link, useLocation, useMatches} from 'react-router';
+import {Await, Link, useLocation, useMatches, useRouteLoaderData} from 'react-router';
 import type {CartApiQueryFragment, HeaderQuery} from 'storefrontapi.generated';
 import type {
   FooterMenuCmsQuery,
@@ -53,7 +53,8 @@ export function PageLayout({
   const [isMobile, setIsMobile] = useState(false);
 
   const matches = useMatches();
-  const isLandingPage = matches.some((m: any) => m.handle?.isLandingPage);
+  const indexData = useRouteLoaderData('routes/_index') as {page?: string} | undefined;
+  const isLandingPage = matches.some((m: any) => m.handle?.isLandingPage) || indexData?.page === 'discover';
 
   const location = useLocation();
   const isSolidHeader =
