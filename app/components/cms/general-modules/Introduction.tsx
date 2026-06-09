@@ -282,8 +282,8 @@ export function Introduction({reference}: IntroductionProps) {
                     >
                       {urlLabel}
                       <span>
-                        <div className="flex justify-center mt-2 md:mt-0">
-                          <div className="h-15 md:h-30" style={{width: '0px', borderLeft: '1px solid transparent', borderImageSource: 'linear-gradient(180deg, #FFFFFF 40.38%, rgba(9, 9, 9, 0) 100%)', borderImageSlice: 1}} />
+                        <div className="flex justify-center mt-2 ">
+                          <div className="h-15 md:h-32" style={{width: '0px', borderLeft: '1px solid transparent', borderImageSource: 'linear-gradient(180deg, #FFFFFF 40.38%, rgba(9, 9, 9, 0) 100%)', borderImageSlice: 1}} />
                         </div>
                       </span>
                     </h3>
