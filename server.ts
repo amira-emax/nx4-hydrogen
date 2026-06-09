@@ -13,6 +13,16 @@ export default {
     executionContext: ExecutionContext,
   ): Promise<Response> {
     try {
+      // Subdomain redirects — add new ones following the same pattern
+      const url = new URL(request.url);
+      const host = url.hostname;
+      const subdomainRoutes: Record<string, string> = {
+        'discover.dailynx4.com': '/discover',
+      };
+      if (subdomainRoutes[host]) {
+        return Response.redirect(`https://dailynx4.com${subdomainRoutes[host]}`, 301);
+      }
+
       const hydrogenContext = await createHydrogenRouterContext(
         request,
         env,
