@@ -1,43 +1,47 @@
 import {useLoaderData} from 'react-router';
 import ModuleRenderer from '~/components/cms/general-modules/ModuleRenderer';
 import {HOME_PAGE_CMS_QUERY} from '~/graphql/cms/query/HomePageQuery';
+import {PROMOTION_PAGE_CMS_QUERY} from '~/graphql/cms/query/PromotionPageQuery';
 import type {Route} from './+types/_index';
-import type {HomePageCmsQuery} from 'types/storefrontapi.generated';
+import type {HomePageCmsQuery, PromotionPageCmsQuery} from 'types/storefrontapi.generated';
 
-export const meta: Route.MetaFunction = () => {
+// Subdomain → CMS query mapping. Add new subdomains here.
+const SUBDOMAIN_PAGES: Record<string, string> = {
+  'discover.dailynx4.com': 'discover',
+};
+
+export const meta: Route.MetaFunction = ({data}) => {
+  if (data?.page === 'discover') return [{title: 'Discover | NX4 Bird Nest'}];
   return [{title: 'NX4 Bird Nest'}];
 };
 
-export async function loader(args: Route.LoaderArgs) {
-  // Start fetching non-critical data without blocking time to first byte
-  // const deferredData = loadDeferredData(args);
+export const handle = ({data}: {data: {page?: string}}) =>
+  data?.page === 'discover' ? {isLandingPage: true} : {};
 
-  // Await the critical data required to render initial state of the page
-  const criticalData = await loadCriticalData(args);
+export async function loader({request, context}: Route.LoaderArgs) {
+  const host = new URL(request.url).hostname;
+  const subdomainPage = SUBDOMAIN_PAGES[host];
 
-  return {
-    // ...deferredData,
-    ...criticalData,
-  };
-}
+  if (subdomainPage === 'discover') {
+    const [{promotionPage}] = await Promise.all([
+      context.storefront.query<PromotionPageCmsQuery>(PROMOTION_PAGE_CMS_QUERY, {
+        variables: {
+          handle: context.env.PROMOTION_PAGE_CMS_SLUG || 'promotion-page',
+        },
+      }),
+    ]);
+    return {page: 'discover', promotionPage, homePage: null};
+  }
 
-/**
- * Load data necessary for rendering content above the fold. This is the critical data
- * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
- */
-async function loadCriticalData({context}: Route.LoaderArgs) {
   const [{homePage}] = await Promise.all([
     context.storefront.query<HomePageCmsQuery>(HOME_PAGE_CMS_QUERY, {
       variables: {
         handle: context.env.HOME_PAGE_CMS_SLUG || 'home-page',
       },
     }),
-    // Add other queries here, so that they are loaded in parallel
   ]);
 
-  return {
-    homePage,
-  };
+  return {page: 'home', homePage, promotionPage: null};
 }
 
 /**
@@ -60,7 +64,33 @@ async function loadCriticalData({context}: Route.LoaderArgs) {
 // }
 
 export default function Homepage() {
-  const {homePage} = useLoaderData<typeof loader>();
+  const {page, homePage, promotionPage} = useLoaderData<typeof loader>();
+
+  if (page === 'discover') {
+    const p = promotionPage as any;
+    const topLogo = p?.topLogo?.reference?.image;
+    const topLabel = p?.topLabel?.value as string | undefined;
+    return (
+      <div className="promotion relative">
+        <div className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 pointer-events-none">
+          <div className="pointer-events-auto opacity-70">
+            {topLogo ? (
+              <img src={topLogo.url} alt={topLogo.altText || ''} className="h-8 md:h-15 lg:h-20 w-auto object-contain" />
+            ) : (
+              <span className="text-white text-sm tracking-widest font-semibold">NX4</span>
+            )}
+          </div>
+          {topLabel && (
+            <span className="pointer-events-auto opacity-70 text-white text-sm md:text-lg lg:text-xl font-light font-imagefuture tracking-widest">
+              {topLabel}
+            </span>
+          )}
+        </div>
+        <ModuleRenderer modules={promotionPage?.modules?.references?.nodes || []} />
+      </div>
+    );
+  }
+
   return (
     <div className="home">
       <ModuleRenderer modules={homePage?.modules?.references?.nodes || []} />
