@@ -16,6 +16,15 @@
   --font-imagefuture: "Image Future", sans-serif;
 }
 
+@layer utilities {
+  @media (min-width: 1470px) and (max-width: 1535px) {
+    .wide-spacer {
+      padding-top: 8.25rem;
+      padding-bottom: 8.25rem;
+    }
+  }
+}
+
 @utility text-display {
   font-family: var(--font-imagefuture);
   font-weight: 300;
