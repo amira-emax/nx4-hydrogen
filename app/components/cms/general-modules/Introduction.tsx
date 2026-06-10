@@ -271,6 +271,22 @@ export function Introduction({reference}: IntroductionProps) {
                       {heroDescription}
                     </h3>
                   )}
+                  {urlLabel && (
+                    <h3
+                      style={{color: contentColor}}
+                      className={cn(
+                        'text-xs md:text-base lg:text-lg font-imagefuture font-normal tracking-widest',
+                        layout === 'center' ? 'pt-10 md:pt-60 pb-5' : 'pt-10 pb-3',
+                      )}
+                    >
+                      {urlLabel}
+                      <span>
+                        <div className="flex justify-center mt-2">
+                          <div className="h-25 md:h-35" style={{width: '0px', borderLeft: '1px solid transparent', borderImageSource: 'linear-gradient(180deg, #FFFFFF 40.38%, rgba(9, 9, 9, 0) 100%)', borderImageSlice: 1}} />
+                        </div>
+                      </span>
+                    </h3>
+                  )}
                 </div>
               </div>
             )}
@@ -307,26 +323,9 @@ export function Introduction({reference}: IntroductionProps) {
               className={cn(
                 'relative z-2',
                 layout === 'center' &&
-                  'md:absolute md:inset-0 md:flex md:flex-col md:items-center md:justify-end pointer-events-none',
+                  'md:absolute md:inset-0 md:flex md:items-end md:justify-center pointer-events-none',
               )}
             >
-              {urlLabel && (
-                <h3
-                  style={{color: contentColor}}
-                  className={cn(
-                    'text-xs md:text-base lg:text-lg font-imagefuture font-normal tracking-widest',
-                    layout === 'center' ? 'pt-10 md:pt-25 ' : 'pt-10 pb-3',
-                    textAlign,
-                  )}
-                >
-                  {urlLabel}
-                  <span>
-                    <div className="flex justify-center mt-2">
-                      <div className="h-15 md:h-35" style={{width: '0px', borderLeft: '1px solid transparent', borderImageSource: 'linear-gradient(180deg, #FFFFFF 40.38%, rgba(9, 9, 9, 0) 100%)', borderImageSlice: 1}} />
-                    </div>
-                  </span>
-                </h3>
-              )}
               <div className="flex flex-col md:flex-row gap-6 md:gap-10 px-15 md:px-40 items-center justify-center w-full">
                 {imageBlocks.map((block, idx) => {
                   const blockImage = block.brandImage?.reference?.image;
