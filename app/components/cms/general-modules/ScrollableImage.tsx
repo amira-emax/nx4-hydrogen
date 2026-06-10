@@ -80,7 +80,7 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
   const label = reference.label?.value;
   const labelFontSize = reference.labelFontSize?.value || 'text-xl md:text-2xl lg:text-3xl';
   const body = parseRichText(reference.body?.value);
-  const bodyFontWeight = reference.bodyFontWeight?.value ||'font-normal';
+  const bodyFontWeight = reference.bodyFontWeight?.value ||'font-normal text-lg lg:text-xl';
   const urlLabel = reference.urlLabel?.value;
   const url = reference.url?.value;
   const urlTextItalic = reference.urlTextItalic?.value === 'true';
@@ -155,7 +155,7 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
       >
         {header && (
           <h2
-            className={cn('mb-2 ', headerFont)}
+            className={cn('', headerFont)}
             style={headerStyle}
           >
             {header}
@@ -169,7 +169,7 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
         )}
 
         {body && (
-          <p className={cn('text-lg lg:text-xl whitespace-pre-line', contentFont, bodyFontWeight)}>
+          <p className={cn('whitespace-pre-line', contentFont, bodyFontWeight)}>
             {body}
           </p>
         )}
