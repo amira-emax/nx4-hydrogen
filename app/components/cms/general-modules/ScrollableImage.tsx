@@ -155,7 +155,7 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
       >
         {header && (
           <h2
-            className={cn('', headerFont)}
+            className={cn('-mb-2', headerFont)}
             style={headerStyle}
           >
             {header}
@@ -169,7 +169,7 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
         )}
 
         {body && (
-          <p className={cn('whitespace-pre-line', contentFont, bodyFontWeight)}>
+          <p className={cn('tracking-widest whitespace-pre-line', contentFont, bodyFontWeight)}>
             {body}
           </p>
         )}
