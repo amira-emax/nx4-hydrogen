@@ -404,7 +404,7 @@ export function Introduction({reference}: IntroductionProps) {
             <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
               {bottomHeader && (
                 <h3
-                  className="text-2xl md:text-4xl mb-4 "
+                  className="text-lg lg:text-xl font-imagefuture font-medium mb-2 "
                   style={headerStyle}
                 >
                   {bottomHeader}
