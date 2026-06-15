@@ -26,6 +26,11 @@ import {cn} from '~/lib/utils';
 type ProductImageProps = {
   selectedVariantImage?: ProductVariantFragment['image'];
   mediaImages?: ShopifyImage[];
+  variantImages?: {
+    references?: {
+      nodes?: Array<{image?: ShopifyImage | null} | null> | null;
+    } | null;
+  } | null;
 };
 const ZOOM_STEPS = [0.75, 1, 1.5, 2];
 
@@ -51,11 +56,19 @@ function useIsDesktop() {
 
 // Unified Product Image Component
 export function ProductImage(props: ProductImageProps) {
+  const {mediaImages, variantImages, ...rest} = props;
+
+  const variantImageNodes = (variantImages?.references?.nodes ?? [])
+    .map((node) => node?.image)
+    .filter((img): img is ShopifyImage => img != null);
+
+  const allImages = [...(mediaImages ?? []), ...variantImageNodes];
+
   const isDesktop = useIsDesktop();
   return isDesktop ? (
-    <DesktopProductImage {...props} />
+    <DesktopProductImage {...rest} mediaImages={allImages} />
   ) : (
-    <MobileProductImage {...props} />
+    <MobileProductImage {...rest} mediaImages={allImages} />
   );
 }
 

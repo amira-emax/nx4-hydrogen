@@ -172,6 +172,7 @@ export default function Product() {
         <ProductImage
           mediaImages={(images.nodes ?? []) as ShopifyImage[]}
           selectedVariantImage={selectedVariant?.image}
+          variantImages={selectedVariant?.variantImages}
         />
         {/* Desktop Help Button - Sticky at bottom */}
         {showProductHelp?.value === 'true' && productHelp && (
@@ -326,6 +327,21 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
     unitPrice {
       amount
       currencyCode
+    }
+    variantImages: metafield(namespace: "custom", key: "images") {
+      references(first: 10) {
+        nodes {
+          ... on MediaImage {
+            image {
+              id
+              url
+              altText
+              width
+              height
+            }
+          }
+        }
+      }
     }
   }
 ` as const;
