@@ -244,7 +244,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
             var n=d.querySelector('[nonce]');
             n&&(j.setAttribute('nonce',n.nonce||n.getAttribute('nonce')));
             f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-N77SSMH7');`,
+            })(window,document,'script','dataLayer','GTM-PZCS4762');`,
           }}
         ></script>
       </head>
@@ -252,7 +252,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
       <noscript>
           <iframe
             title="Google Tag Manager"
-            src="https://www.googletagmanager.com/ns.html?id=GTM-N77SSMH7"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PZCS4762"
             height="0"
             width="0"
             style={{
