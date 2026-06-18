@@ -38,7 +38,7 @@ export function CartSummary({cart, layout}: CartSummaryProps) {
         value: cart?.cost?.subtotalAmount?.amount ?? 0,
         items,
       };
-      console.log('[DataLayer] begin_checkout', payload);
+      console.log('[DataLayer] begin_checkout', JSON.stringify(payload, null, 2));
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push(payload);
     }
