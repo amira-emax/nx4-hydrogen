@@ -13,10 +13,12 @@ export function ProductForm({
   productOptions,
   selectedVariant,
   complimentaryShipping,
+  productTitle,
 }: {
   productOptions: MappedProductOptions[];
   selectedVariant: ProductFragment['selectedOrFirstAvailableVariant'];
   complimentaryShipping: ProductFragment['complimentaryShipping'];
+  productTitle?: string;
 }) {
   const navigate = useNavigate();
   const {open} = useSheet();
@@ -114,6 +116,19 @@ export function ProductForm({
           }
           variant="filled"
           className="w-full"
+          page="product"
+          productInfo={
+            selectedVariant
+              ? {
+                  id: selectedVariant.id,
+                  name: productTitle ?? '',
+                  variant: selectedVariant.title ?? '',
+                  price: parseFloat(selectedVariant.price.amount),
+                  quantity: 1,
+                  currency: selectedVariant.price.currencyCode,
+                }
+              : undefined
+          }
         >
           {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
         </AddToCartButton>

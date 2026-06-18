@@ -83,6 +83,7 @@ export function ProductInfo({
         productOptions={productOptions}
         selectedVariant={selectedVariant}
         complimentaryShipping={complimentaryShipping}
+        productTitle={title}
       />
 
       {/* Description */}
