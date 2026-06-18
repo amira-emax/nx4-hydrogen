@@ -47,6 +47,15 @@ export function ProductStickyBar({
             ]}
             variant="filled"
             className="text-caption"
+            page="product-sticky-bar"
+            productInfo={{
+              id: selectedVariant.id,
+              name: product.title,
+              variant: selectedVariant.title ?? '',
+              price: parseFloat(selectedVariant.price.amount),
+              quantity: 1,
+              currency: selectedVariant.price.currencyCode,
+            }}
           >
             {selectedVariant.availableForSale ? (
               <>
