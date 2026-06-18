@@ -20,6 +20,29 @@ export function CartSummary({cart, layout}: CartSummaryProps) {
 
   if (layout === 'aside') {
     const {close} = useSheet();
+
+    function handleCheckout() {
+      const items = (cart?.lines?.nodes ?? []).map((line) => ({
+        id: line.merchandise.product.id,
+        name: line.merchandise.product.title,
+        variant: line.merchandise.title,
+        price: parseFloat(line.cost.amountPerQuantity.amount),
+        quantity: line.quantity,
+        currency: line.cost.amountPerQuantity.currencyCode,
+      }));
+
+      const payload = {
+        event: 'begin_checkout',
+        eventPage: 'cart',
+        currency: cart?.cost?.subtotalAmount?.currencyCode ?? 'unknown',
+        value: cart?.cost?.subtotalAmount?.amount ?? 0,
+        items,
+      };
+      console.log('[DataLayer] begin_checkout', payload);
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(payload);
+    }
+
     return (
       <div aria-labelledby="cart-summary" className="grid gap-4">
         <div className="flex items-center justify-between font-normal text-body-regular tracking-widest text-black uppercase">
@@ -38,7 +61,7 @@ export function CartSummary({cart, layout}: CartSummaryProps) {
         <CartGiftCard giftCardCodes={cart?.appliedGiftCards} /> */}
 
         {cart?.checkoutUrl && (
-          <a href={cart.checkoutUrl} target="_self" className="w-full">
+          <a href={cart.checkoutUrl} target="_self" className="w-full" onClick={handleCheckout}>
             <Button variant="filled" className="w-full">
               Check out
             </Button>
