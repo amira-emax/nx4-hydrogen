@@ -29,6 +29,7 @@ export interface ScrollableImageFragment {
   id: string;
   type: string;
   bgImage?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
+  bgImageMobile?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
   bgPosition?: {value?: string};
   bgFix?: {value?: string};
   sectionHeight?: {value?: string};
@@ -62,6 +63,7 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const bgImage = reference.bgImage?.reference?.image;
+  const bgImageMobile = reference.bgImageMobile?.reference?.image || bgImage;
   const bgPosition = reference.bgPosition?.value || 'center';
   const bgFix = reference.bgFix?.value === 'true';
   const sectionHeight = reference.sectionHeight?.value || '50';
@@ -139,15 +141,32 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
 
   return (
     <section
-      className={cn('relative w-full bg-no-repeat bg-cover flex', textPositionClass)}
+      className={cn('relative w-full flex', textPositionClass)}
       style={{
-        backgroundImage: bgImage ? `url('${bgImage.url}')` : undefined,
-        backgroundPosition: bgPosition,
-        backgroundAttachment: bgFix ? 'fixed' : 'scroll',
         minHeight: `${sectionHeight}vh`,
         backgroundColor: '#1a1a1a',
       }}
     >
+      {bgImageMobile && (
+        <div
+          className="absolute inset-0 z-0 bg-no-repeat bg-cover md:hidden"
+          style={{
+            backgroundImage: `url('${bgImageMobile.url}')`,
+            backgroundPosition: bgPosition,
+            backgroundAttachment: bgFix ? 'fixed' : 'scroll',
+          }}
+        />
+      )}
+      {bgImage && (
+        <div
+          className="absolute inset-0 z-0 bg-no-repeat bg-cover hidden md:block"
+          style={{
+            backgroundImage: `url('${bgImage.url}')`,
+            backgroundPosition: bgPosition,
+            backgroundAttachment: bgFix ? 'fixed' : 'scroll',
+          }}
+        />
+      )}
       <div
         ref={contentRef}
         className={cn('p-10 lg:px-8 relative z-10', columnClass, textAlignClass)}
