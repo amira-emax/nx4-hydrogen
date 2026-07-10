@@ -283,11 +283,15 @@ export function Introduction({reference}: IntroductionProps) {
                 className={cn(
                   layout !== 'center'
                     ? 'w-full md:w-1/2 px-6 md:px-20'
-                    : 'absolute inset-0 flex justify-center pt-20 md:pt-65',
+                    : 'absolute inset-0 flex justify-center pt-20 md:pt-40 lg:pt-45 xl:pt-65',
                   textAlign,
                 )}
               >
-                <div>
+                <div
+                  className={cn(
+                    layout === 'center' && 'flex h-full flex-col md:block md:h-auto',
+                  )}
+                >
                   {heroHeader && (
                     <h1
                       className="leading-tight text-lg md:text-4xl lg:text-5xl whitespace-pre-line"
@@ -312,14 +316,20 @@ export function Introduction({reference}: IntroductionProps) {
                       {heroDescription}
                     </h3>
                   )}
-                  <div className="py-6 md:py-20 2xl:py-33"></div>
+                  <div
+                    className={cn(
+                      layout === 'center'
+                        ? 'hidden md:block md:py-20 2xl:py-33'
+                        : 'py-6 md:py-20 2xl:py-33',
+                    )}
+                  ></div>
                   {urlLabel && (
                     <h3
                       style={{color: contentColor}}
                       className={cn(
                         'text-xs md:text-base lg:text-lg font-imagefuture font-normal tracking-widest',
                         layout === 'center'
-                          ? 'pt-22 md:pt-20 pb-5'
+                          ? 'mt-auto md:mt-0 md:pt-5 lg:pt-15 xl:pt-20 pb-2'
                           : 'pt-10 pb-3',
                       )}
                     >
@@ -379,7 +389,7 @@ export function Introduction({reference}: IntroductionProps) {
                   'md:absolute md:inset-0 md:flex md:items-end md:justify-center pointer-events-none',
               )}
             >
-              <div className="flex flex-col md:flex-row gap-6 md:gap-10 px-25 md:px-40 items-center justify-center w-full">
+              <div className="flex flex-col md:flex-row gap-6 md:gap-10 px-25  md:px-32 lg:px-35 xl:px-40 items-center justify-center w-full">
                 {imageBlocks.map((block, idx) => {
                   const blockImage = block.brandImage?.reference?.image;
                   const blockText = block.text?.value;
