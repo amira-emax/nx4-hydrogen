@@ -15,6 +15,13 @@ export const BODY_INFO_FRAGMENT = `#graphql
         }
       }
     }
+    bgImageMobile: field(key: "background_image_mobile") {
+      reference {
+        ... on MediaImage {
+          ...Image
+        }
+      }
+    }
     featuredImage: field(key: "image") {
       reference {
         ... on MediaImage {
@@ -97,6 +104,13 @@ export const BODY_INFO_FRAGMENT = `#graphql
       value
     }
     sectionImage: field(key: "section_image") {
+      reference {
+        ... on MediaImage {
+          ...Image
+        }
+      }
+    }
+    sectionImageMobile: field(key: "section_image_mobile") {
       reference {
         ... on MediaImage {
           ...Image

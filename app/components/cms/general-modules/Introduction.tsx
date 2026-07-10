@@ -40,6 +40,7 @@ export interface IntroductionFragment {
     };
   };
   bgOverlay?: {value?: string};
+  bgOverlayMobile?: {value?: string};
   heroHeaderTop?: {value?: string};
   headerTopColorType?: {value?: string};
   headerTopColor?: {value?: string};
@@ -49,7 +50,13 @@ export interface IntroductionFragment {
       image?: {url: string; altText?: string; width?: number; height?: number};
     };
   };
+  heroImageMobile?: {
+    reference?: {
+      image?: {url: string; altText?: string; width?: number; height?: number};
+    };
+  };
   heroImageOverlay?: {value?: string};
+  heroImageOverlayMobile?: {value?: string};
   imageSize?: {value?: string};
   imgPaddingTop?: {value?: string};
   imgPaddingBottom?: {value?: string};
@@ -110,12 +117,16 @@ export function Introduction({reference}: IntroductionProps) {
 
   const bgImage = reference.bgImage?.reference?.image;
   const bgOverlay = reference.bgOverlay?.value;
+  const bgOverlayMobile = reference.bgOverlayMobile?.value || bgOverlay;
   const heroHeaderTop = parseRichText(reference.heroHeaderTop?.value);
   const headerTopColorType = reference.headerTopColorType?.value || 'solid';
   const headerTopColor = reference.headerTopColor?.value || '#000000';
   const headerTopGradient = reference.headerTopGradient?.value;
   const heroImage = reference.heroImage?.reference?.image;
+  const heroImageMobile = reference.heroImageMobile?.reference?.image || heroImage;
   const heroImageOverlay = reference.heroImageOverlay?.value;
+  const heroImageOverlayMobile =
+    reference.heroImageOverlayMobile?.value || heroImageOverlay;
   const imageSize = reference.imageSize?.value || '100';
   const imgPaddingTop = reference.imgPaddingTop?.value || '0';
   const imgPaddingBottom = reference.imgPaddingBottom?.value || '0';
@@ -171,28 +182,36 @@ export function Introduction({reference}: IntroductionProps) {
     <>
       <section>
         <div
-          className="relative justify-center mx-auto"
+          className={cn(
+            'relative justify-center mx-auto pb-2.5',
+            bgImage && 'bg-cover bg-center',
+            bgImage && reference.heroImageMobile?.reference?.image
+              ? 'bg-none md:[background-image:var(--bg-image)]'
+              : '[background-image:var(--bg-image)]',
+          )}
           style={
             bgImage
-              ? {
-                  backgroundImage: `url('${bgImage.url}')`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }
+              ? ({'--bg-image': `url('${bgImage.url}')`} as React.CSSProperties)
               : undefined
           }
         >
+          {bgOverlayMobile && (
+            <div
+              className="absolute inset-0 pointer-events-none z-1 md:hidden"
+              style={{background: bgOverlayMobile}}
+            />
+          )}
           {bgOverlay && (
             <div
-              className="absolute inset-0 pointer-events-none z-1"
+              className="absolute inset-0 pointer-events-none z-1 hidden md:block"
               style={{background: bgOverlay}}
             />
           )}
 
           {heroHeaderTop && (
-            <div className={cn('relative z-2 w-full px-20 pt-30', textAlign)}>
+            <div className={cn('relative z-2 w-full px-6 pt-10 md:px-20 md:pt-30', textAlign)}>
               <h1
-                className="text-4xl md:text-5xl lg:text-6xl leading-tight"
+                className="text-2xl md:text-5xl lg:text-6xl leading-tight"
                 style={headerTopStyle}
               >
                 {heroHeaderTop}
@@ -220,19 +239,33 @@ export function Introduction({reference}: IntroductionProps) {
                 paddingBottom: `${imgPaddingBottom}px`,
               }}
             >
+              {heroImageMobile && (
+                <Image
+                  data={heroImageMobile}
+                  className={cn('md:hidden', layout === 'center' && 'mx-auto')}
+                 
+                  sizes="100vw"
+                />
+              )}
               {heroImage && (
                 <Image
                   data={heroImage}
-                  className={cn(layout === 'center' && 'mx-auto')}
+                  className={cn('hidden md:block', layout === 'center' && 'mx-auto')}
                   style={{maxWidth: `${imageSize}%`}}
                   sizes="(min-width: 768px) 50vw, 100vw"
                 />
               )}
             </div>
 
+            {heroImageOverlayMobile && (
+              <div
+                className="absolute inset-0 pointer-events-none md:hidden"
+                style={{background: heroImageOverlayMobile}}
+              />
+            )}
             {heroImageOverlay && (
               <div
-                className="absolute inset-0 pointer-events-none"
+                className="absolute inset-0 pointer-events-none hidden md:block"
                 style={{background: heroImageOverlay}}
               />
             )}
@@ -241,15 +274,15 @@ export function Introduction({reference}: IntroductionProps) {
               <div
                 className={cn(
                   layout !== 'center'
-                    ? 'w-full md:w-1/2 px-20'
-                    : 'absolute inset-0 flex justify-center pt-30 md:pt-65',
+                    ? 'w-full md:w-1/2 px-6 md:px-20'
+                    : 'absolute inset-0 flex justify-center pt-20 md:pt-65',
                   textAlign,
                 )}
               >
                 <div>
                   {heroHeader && (
                     <h1
-                      className="leading-tight text-3xl md:text-4xl lg:text-5xl  whitespace-pre-line"
+                      className="leading-tight text-lg md:text-4xl lg:text-5xl tracking-wide whitespace-pre-line"
                       style={headerStyle}
                     >
                       {heroHeader}
@@ -257,7 +290,7 @@ export function Introduction({reference}: IntroductionProps) {
                   )}
                   {heroLabel && (
                     <h3
-                      className="text-xl lg:text-2xl "
+                      className="text-xs md:text-xl lg:text-2xl "
                       style={{color: contentColor}}
                     >
                       {heroLabel}
@@ -265,23 +298,23 @@ export function Introduction({reference}: IntroductionProps) {
                   )}
                   {heroDescription && (
                     <h3
-                      className="pt-2 text-xl lg:text-2xl font-light  whitespace-pre-line"
+                      className="pt-1 text-xs md:text-xl lg:text-2xl font-light  whitespace-pre-line"
                       style={{color: contentColor}}
                     >
                       {heroDescription}
                     </h3>
                   )}
-                  <div className="md:py-20 2xl:py-33"></div>
+                  <div className="py-6 md:py-20 2xl:py-33"></div>
                   {urlLabel && (
                     <h3
                       style={{color: contentColor}}
                       className={cn(
                         'text-xs md:text-base lg:text-lg font-imagefuture font-normal tracking-widest',
-                        layout === 'center' ? 'pt-10 md:pt-20 pb-5' : 'pt-10 pb-3',
+                        layout === 'center' ? 'pt-22 md:pt-20 pb-5' : 'pt-10 pb-3',
                       )}
                     >
                       {urlLabel}
-                      <span>
+                      <span className="hidden md:inline">
                         <div className="flex justify-center mt-2 md:mt-0">
                           <div className="h-15 md:h-30" style={{width: '1px', background: 'linear-gradient(180deg, #FFFFFF 40.38%, #090909 100%)'}} />
                         </div>
@@ -302,7 +335,7 @@ export function Introduction({reference}: IntroductionProps) {
             >
               {gridLabel && (
                 <p
-                  className="text-lg md:text-xl "
+                  className="text-base md:text-xl "
                   style={{color: gridTextColor}}
                 >
                   {gridLabel}
@@ -310,7 +343,7 @@ export function Introduction({reference}: IntroductionProps) {
               )}
               {gridTitle && (
                 <h2
-                  className="text-2xl md:text-4xl "
+                  className="text-xl md:text-4xl "
                   style={{color: gridTextColor}}
                 >
                   {gridTitle}
@@ -327,7 +360,7 @@ export function Introduction({reference}: IntroductionProps) {
                   'md:absolute md:inset-0 md:flex md:items-end md:justify-center pointer-events-none',
               )}
             >
-              <div className="flex flex-col md:flex-row gap-6 md:gap-10 px-15 md:px-40 items-center justify-center w-full">
+              <div className="flex flex-col md:flex-row gap-6 md:gap-10 px-25 md:px-40 items-center justify-center w-full">
                 {imageBlocks.map((block, idx) => {
                   const blockImage = block.brandImage?.reference?.image;
                   const blockText = block.text?.value;
@@ -363,7 +396,7 @@ export function Introduction({reference}: IntroductionProps) {
                       {blockText && (
                         <div
                           className={cn(
-                            'absolute inset-0 flex px-6 py-6',
+                            'absolute inset-0 flex px-6 md:py-6',
                             blockTextPosition === 'top'
                               ? 'items-start'
                               : blockTextPosition === 'bottom'
@@ -375,7 +408,7 @@ export function Introduction({reference}: IntroductionProps) {
                           <div className="w-full text-center">
                             <span
                               className={cn(
-                                'text-xl md:text-2xl italic font-imagefuture font-normal tracking-wide',
+                                'text-base md:text-2xl italic font-imagefuture font-normal tracking-wide',
                                 showTextShadow && 'text-shadow-lg',
                               )}
                             >
@@ -401,18 +434,26 @@ export function Introduction({reference}: IntroductionProps) {
               paddingBottom: `${bottomDescPaddingBottom}px`,
             }}
           >
-            <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+            <div className="mx-auto max-w-sm md:max-w-7xl px-6 lg:px-8 text-center">
               {bottomHeader && (
-                <h3
-                  className="text-2xl md:text-4xl mb-4 "
-                  style={headerStyle}
-                >
-                  {bottomHeader}
-                </h3>
+                <>
+                  <h3
+                    className="text-sm md:hidden"
+                    style={{color: '#C3C3C3BF'}}
+                  >
+                    {bottomHeader}
+                  </h3>
+                  <h3
+                    className="hidden md:block md:text-4xl mb-4"
+                    style={headerStyle}
+                  >
+                    {bottomHeader}
+                  </h3>
+                </>
               )}
               {bottomDescription && (
                 <p
-                  className="mx-auto text-lg lg:text-xl font-imagefuture font-normal"
+                  className="mx-auto px-5 md:px-0 text-xs lg:text-xl font-imagefuture font-normal"
                   style={{color: '#C3C3C3BF'}}
                 >
                   {bottomDescription}
