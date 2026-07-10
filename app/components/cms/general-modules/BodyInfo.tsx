@@ -315,7 +315,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
             </div>
 
             {/* Featured media */}
-            <div className="order-1 md:order-0 justify-items-center">
+            <div className="order-1 md:order-0 justify-self-center">
               <div className="md:col-span-1 flex items-center justify-center w-[20rem] md:w-[30rem] aspect-[3/4] overflow-hidden relative">
                 {slideImages.length > 0 ? (
                   <>
