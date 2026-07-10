@@ -90,7 +90,7 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
   const label = reference.label?.value;
   const labelFontSize = reference.labelFontSize?.value || 'text-xl md:text-2xl lg:text-3xl';
   const body = parseRichText(reference.body?.value);
-  const bodyFontWeight = reference.bodyFontWeight?.value ||'font-normal text-lg lg:text-xl';
+  const bodyFontWeight = reference.bodyFontWeight?.value ||'font-normal text-xs md:text-xl';
   const urlLabel = reference.urlLabel?.value;
   const url = reference.url?.value;
   const urlTextItalic = reference.urlTextItalic?.value === 'true';
