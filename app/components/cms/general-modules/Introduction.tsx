@@ -123,7 +123,8 @@ export function Introduction({reference}: IntroductionProps) {
   const headerTopColor = reference.headerTopColor?.value || '#000000';
   const headerTopGradient = reference.headerTopGradient?.value;
   const heroImage = reference.heroImage?.reference?.image;
-  const heroImageMobile = reference.heroImageMobile?.reference?.image || heroImage;
+  const heroImageMobile =
+    reference.heroImageMobile?.reference?.image || heroImage;
   const heroImageOverlay = reference.heroImageOverlay?.value;
   const heroImageOverlayMobile =
     reference.heroImageOverlayMobile?.value || heroImageOverlay;
@@ -209,7 +210,12 @@ export function Introduction({reference}: IntroductionProps) {
           )}
 
           {heroHeaderTop && (
-            <div className={cn('relative z-2 w-full px-6 pt-10 md:px-20 md:pt-30', textAlign)}>
+            <div
+              className={cn(
+                'relative z-2 w-full px-6 pt-10 md:px-20 md:pt-30',
+                textAlign,
+              )}
+            >
               <h1
                 className="text-2xl md:text-5xl lg:text-6xl leading-tight"
                 style={headerTopStyle}
@@ -243,14 +249,16 @@ export function Introduction({reference}: IntroductionProps) {
                 <Image
                   data={heroImageMobile}
                   className={cn('md:hidden', layout === 'center' && 'mx-auto')}
-                 
                   sizes="100vw"
                 />
               )}
               {heroImage && (
                 <Image
                   data={heroImage}
-                  className={cn('hidden md:block', layout === 'center' && 'mx-auto')}
+                  className={cn(
+                    'hidden md:block',
+                    layout === 'center' && 'mx-auto',
+                  )}
                   style={{maxWidth: `${imageSize}%`}}
                   sizes="(min-width: 768px) 50vw, 100vw"
                 />
@@ -282,7 +290,7 @@ export function Introduction({reference}: IntroductionProps) {
                 <div>
                   {heroHeader && (
                     <h1
-                      className="leading-tight text-lg md:text-4xl lg:text-5xl tracking-wide whitespace-pre-line"
+                      className="leading-tight text-lg md:text-4xl lg:text-5xl whitespace-pre-line"
                       style={headerStyle}
                     >
                       {heroHeader}
@@ -310,13 +318,24 @@ export function Introduction({reference}: IntroductionProps) {
                       style={{color: contentColor}}
                       className={cn(
                         'text-xs md:text-base lg:text-lg font-imagefuture font-normal tracking-widest',
-                        layout === 'center' ? 'pt-22 md:pt-20 pb-5' : 'pt-10 pb-3',
+                        layout === 'center'
+                          ? 'pt-22 md:pt-20 pb-5'
+                          : 'pt-10 pb-3',
                       )}
                     >
                       {urlLabel}
                       <span className="hidden md:inline">
                         <div className="flex justify-center mt-2 md:mt-0">
-                          <div className="h-15 md:h-30" style={{width: '1px', background: 'linear-gradient(180deg, #FFFFFF 40.38%, #090909 100%)'}} />
+                          <div
+                            className="h-25 md:h-35"
+                            style={{
+                              width: '0px',
+                              borderLeft: '1px solid transparent',
+                              borderImageSource:
+                                'linear-gradient(180deg, #FFFFFF 40.38%, rgba(9, 9, 9, 0) 100%)',
+                              borderImageSlice: 1,
+                            }}
+                          />
                         </div>
                       </span>
                     </h3>
@@ -423,7 +442,6 @@ export function Introduction({reference}: IntroductionProps) {
               </div>
             </div>
           )}
-
         </div>
 
         {(bottomHeader || bottomDescription) && (
@@ -438,14 +456,8 @@ export function Introduction({reference}: IntroductionProps) {
               {bottomHeader && (
                 <>
                   <h3
-                    className="text-sm md:hidden"
+                    className="text-sm md:text-lg lg:text-xl font-imagefuture font-medium"
                     style={{color: '#C3C3C3BF'}}
-                  >
-                    {bottomHeader}
-                  </h3>
-                  <h3
-                    className="hidden md:block md:text-4xl mb-4"
-                    style={headerStyle}
                   >
                     {bottomHeader}
                   </h3>
