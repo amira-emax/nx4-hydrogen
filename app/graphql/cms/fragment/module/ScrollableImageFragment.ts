@@ -15,6 +15,13 @@ export const SCROLLABLE_IMAGE_FRAGMENT = `#graphql
         }
       }
     }
+    bgImageMobile: field(key: "background_image_mobile") {
+      reference {
+        ... on MediaImage {
+          ...Image
+        }
+      }
+    }
     bgPosition: field(key: "bg_position") {
       value
     }
@@ -22,6 +29,12 @@ export const SCROLLABLE_IMAGE_FRAGMENT = `#graphql
       value
     }
     sectionHeight: field(key: "section_height") {
+      value
+    }
+    sectionHeightMobile: field(key: "section_height_mobile") {
+      value
+    }
+    mobileTextLayout: field(key: "mobile_text_layout") {
       value
     }
     textFade: field(key: "text_fade") {

@@ -19,6 +19,9 @@ export const INTRODUCTION_FRAGMENT = `#graphql
     bgOverlay: field(key: "bg_overlay") {
       value
     }
+    bgOverlayMobile: field(key: "background_overlay_mobile") {
+      value
+    }
     heroHeaderTop: field(key: "hero_header_top") {
       value
     }
@@ -38,7 +41,17 @@ export const INTRODUCTION_FRAGMENT = `#graphql
         }
       }
     }
+    heroImageMobile: field(key: "hero_image_mobile") {
+      reference {
+        ... on MediaImage {
+          ...Image
+        }
+      }
+    }
     heroImageOverlay: field(key: "hero_image_overlay") {
+      value
+    }
+    heroImageOverlayMobile: field(key: "hero_image_overlay_mobile") {
       value
     }
     imageSize: field(key: "image_size") {

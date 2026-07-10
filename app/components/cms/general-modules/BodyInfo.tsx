@@ -45,6 +45,11 @@ export interface BodyInfoFragment {
       image?: {url: string; altText?: string; width?: number; height?: number};
     };
   };
+  bgImageMobile?: {
+    reference?: {
+      image?: {url: string; altText?: string; width?: number; height?: number};
+    };
+  };
   featuredImage?: {
     reference?: {
       image?: {url: string; altText?: string; width?: number; height?: number};
@@ -64,6 +69,11 @@ export interface BodyInfoFragment {
   };
   featuredVideo?: {reference?: {id?: string; sources?: VideoSource[]}};
   sectionImage?: {
+    reference?: {
+      image?: {url: string; altText?: string; width?: number; height?: number};
+    };
+  };
+  sectionImageMobile?: {
     reference?: {
       image?: {url: string; altText?: string; width?: number; height?: number};
     };
@@ -104,6 +114,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
   const descRef = useRef<HTMLDivElement>(null);
 
   const bgImage = reference.bgImage?.reference?.image;
+  const bgImageMobile = reference.bgImageMobile?.reference?.image || bgImage;
   const featuredImage = reference.featuredImage?.reference?.image;
   const featuredImages = (reference.featuredImages?.references?.nodes || [])
     .map((n) => n.image)
@@ -151,6 +162,8 @@ export function BodyInfo({reference}: BodyInfoProps) {
   const linkUrl = reference.linkUrl?.value;
   const urlLabelItalic = reference.urlLabelItalic?.value === 'true';
   const sectionImage = reference.sectionImage?.reference?.image;
+  const sectionImageMobile =
+    reference.sectionImageMobile?.reference?.image || sectionImage;
   const certLogos = reference.certLogos?.references?.nodes || [];
   const certText = reference.certText?.value;
   const mediaItemHeight = reference.mediaItemHeight?.value || 'aspect-square';
@@ -220,18 +233,21 @@ export function BodyInfo({reference}: BodyInfoProps) {
   return (
     <section>
       <div
-        className="relative justify-center mx-auto py-20"
-        style={{
-          ...(bgImage
-            ? {
-                backgroundImage: `url('${bgImage.url}')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'top',
-              }
-            : {}),
-          color: contentColor,
-        }}
+        className="relative justify-center mx-auto md:py-20"
+        style={{color: contentColor}}
       >
+        {bgImageMobile && (
+          <div
+            className="absolute inset-0 z-0 bg-no-repeat bg-cover bg-top md:hidden"
+            style={{backgroundImage: `url('${bgImageMobile.url}')`}}
+          />
+        )}
+        {bgImage && (
+          <div
+            className="absolute inset-0 z-0 bg-no-repeat bg-cover bg-top hidden md:block"
+            style={{backgroundImage: `url('${bgImage.url}')`}}
+          />
+        )}
         {/* Top grid: text + featured media */}
         {(title ||
           subTitleNumber ||
@@ -241,12 +257,12 @@ export function BodyInfo({reference}: BodyInfoProps) {
           featuredImage ||
           featuredVideoSources.length > 0) && (
           <div
-            className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 items-center px-2 lg:px-20"
+            className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 items-center px-2 lg:px-20"
             style={{paddingBlock: `${sectionHeaderPadding}rem`}}
           >
             {/* Text content */}
-            <div className="flex items-start justify-center h-full py-10">
-              <div className="md:col-span-2 flex flex-col h-full mt-6 md:mt-0">
+            <div className="order-2 md:order-0 flex items-start justify-center h-full md:py-10">
+              <div className="md:col-span-2 flex flex-col h-full text-center md:mt-0 md:text-left">
                 <div
                   ref={headerRef}
                   className="px-10"
@@ -255,7 +271,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
                   {title && (
                     <h2
                       className={cn(
-                        'text-3xl',
+                        'text-xl md:text-3xl',
                         contentFont,
                         titleItalic && 'italic',
                         titleSemibold && 'font-semibold',
@@ -275,21 +291,21 @@ export function BodyInfo({reference}: BodyInfoProps) {
                     </h1>
                   )}
                   {subTitle && (
-                    <h2 className={cn('text-3xl', contentFont)}>{subTitle}</h2>
+                    <h2 className={cn('text-xl md:text-3xl', contentFont)}>{subTitle}</h2>
                   )}
                 </div>
 
-                <div ref={descRef} className="px-10 py-10 mt-auto">
+                <div ref={descRef} className="px-10 py-5 md:py-10 mt-auto">
                   {description && (
-                    <div  className={cn('pt-30')}>
-                      <p className={cn('mb-4 lg:text-lg', contentFont)}>
+                    <div  className={cn('md:pt-30')}>
+                      <p className={cn('md:mb-4 text-sm lg:text-lg', contentFont)}>
                         {description}
                       </p>
                     </div>
                   )}
                   {caption && (
-                    <div className={cn('py-10')}>
-                      <p className={cn('md:text-lg lg:text-xl font-medium italic', contentFont)} >
+                    <div className={cn('py-5 md:py-10')}>
+                      <p className={cn('text-lg md:text-lg lg:text-xl font-medium italic', contentFont)} >
                         {caption}
                       </p>
                     </div>
@@ -299,7 +315,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
             </div>
 
             {/* Featured media */}
-            <div className="justify-items-center">
+            <div className="order-1 md:order-0 justify-items-center">
               <div className="md:col-span-1 flex items-center justify-center w-[20rem] md:w-[30rem] aspect-[3/4] overflow-hidden relative">
                 {slideImages.length > 0 ? (
                   <>
@@ -334,11 +350,20 @@ export function BodyInfo({reference}: BodyInfoProps) {
         )}
 
         {/* Section image */}
+        {sectionImageMobile && (
+          <div className="relative z-10 flex justify-center md:px-6 pt-10 md:hidden">
+            <Image
+              data={sectionImageMobile}
+              className="md:rounded-2xl shadow-md w-full max-w-4xl object-cover"
+              sizes="100vw"
+            />
+          </div>
+        )}
         {sectionImage && (
-          <div className="flex justify-center px-6 pt-10">
+          <div className="relative z-10 hidden md:flex justify-center md:px-6 pt-10">
             <Image
               data={sectionImage}
-              className="rounded-2xl shadow-md w-full max-w-4xl object-cover"
+              className="md:rounded-2xl shadow-md w-full max-w-4xl object-cover"
               sizes="(min-width: 768px) 672px, 100vw"
             />
           </div>
@@ -349,10 +374,9 @@ export function BodyInfo({reference}: BodyInfoProps) {
           brandSubHeader ||
           brandDescription ||
           (textUrl && linkUrl)) && (
-          <div className="pt-10 md:pt-20">
+          <div className="relative z-10 pt-10 md:pt-20">
             <div
               className="px-6"
-              style={{paddingBlock: `${sectionContentPadding}rem`}}
             >
               {brandHeader && (
                 <div className="text-center">
@@ -406,7 +430,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
         )}
 
         {certLogos.length > 0 && (
-          <div className={cn(certLogos.length > 2 ? 'max-w-xs md:max-w-2xl' : 'max-w-xs', 'mx-auto pt-10 md:pt-0')}>
+          <div className={cn(certLogos.length > 2 ? 'max-w-xs md:max-w-2xl' : 'max-w-xs', 'relative z-10 mx-auto')}>
             <div
               className="px-6"
               style={{paddingBlock: `${sectionContentPadding}rem`}}

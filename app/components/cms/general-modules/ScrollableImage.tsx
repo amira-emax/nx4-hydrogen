@@ -29,9 +29,12 @@ export interface ScrollableImageFragment {
   id: string;
   type: string;
   bgImage?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
+  bgImageMobile?: {reference?: {image?: {url: string; altText?: string; width?: number; height?: number}}};
   bgPosition?: {value?: string};
   bgFix?: {value?: string};
   sectionHeight?: {value?: string};
+  sectionHeightMobile?: {value?: string};
+  mobileTextLayout?: {value?: string};
   textFade?: {value?: string};
   contentFont?: {value?: string};
   headerFont?: {value?: string};
@@ -62,9 +65,16 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const bgImage = reference.bgImage?.reference?.image;
+  const bgImageMobile = reference.bgImageMobile?.reference?.image || bgImage;
+  const mobileAspectRatio =
+    bgImageMobile?.width && bgImageMobile?.height
+      ? `${bgImageMobile.width} / ${bgImageMobile.height}`
+      : undefined;
   const bgPosition = reference.bgPosition?.value || 'center';
   const bgFix = reference.bgFix?.value === 'true';
   const sectionHeight = reference.sectionHeight?.value || '50';
+  const sectionHeightMobile = reference.sectionHeightMobile?.value || sectionHeight;
+  const isStackedMobile = reference.mobileTextLayout?.value === 'below';
   const textFade = reference.textFade?.value === 'true';
   const contentFont = reference.contentFont?.value || 'font-imagefuture';
   const headertext = 'text-lg md:text-2xl lg:text-3xl';
@@ -114,6 +124,13 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
         ? 'items-end'
         : 'items-center';
 
+  const textPositionClassDesktop =
+    textPosition === 'top'
+      ? 'md:items-start'
+      : textPosition === 'bottom'
+        ? 'md:items-end'
+        : 'md:items-center';
+
   const columnClass =
     contentAlignment === 'center'
       ? 'mx-auto w-full'
@@ -139,18 +156,58 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
 
   return (
     <section
-      className={cn('relative w-full bg-no-repeat bg-cover flex', textPositionClass)}
-      style={{
-        backgroundImage: bgImage ? `url('${bgImage.url}')` : undefined,
-        backgroundPosition: bgPosition,
-        backgroundAttachment: bgFix ? 'fixed' : 'scroll',
-        minHeight: `${sectionHeight}vh`,
-        backgroundColor: '#1a1a1a',
-      }}
+      className={cn(
+        'relative w-full flex pb-2.5',
+        isStackedMobile
+          ? cn(
+              'flex-col md:flex-row md:min-h-(--section-height)',
+              textPositionClassDesktop,
+            )
+          : cn(
+              'min-h-(--section-height-mobile) md:min-h-(--section-height)',
+              textPositionClass,
+            ),
+      )}
+      style={
+        {
+          '--section-height': `${sectionHeight}vh`,
+          '--section-height-mobile': `${sectionHeightMobile}vh`,
+          backgroundColor: 'black',
+        } as React.CSSProperties
+      }
     >
+      {bgImageMobile && (
+        isStackedMobile ? (
+          <img
+            src={bgImageMobile.url}
+            alt={bgImageMobile.altText || ''}
+            className="w-full h-auto object-cover md:hidden"
+            style={mobileAspectRatio ? {aspectRatio: mobileAspectRatio} : undefined}
+          />
+        ) : (
+          <div
+            className="absolute inset-0 z-0 bg-no-repeat bg-cover md:hidden"
+            style={{
+              backgroundImage: `url('${bgImageMobile.url}')`,
+              backgroundPosition: bgPosition,
+              backgroundAttachment: bgFix ? 'fixed' : 'scroll',
+            }}
+          />
+        )
+      )}
+      {bgImage && (
+        <div
+          className="absolute inset-0 z-0 bg-no-repeat bg-cover hidden md:block"
+          style={{
+            backgroundImage: `url('${bgImage.url}')`,
+            backgroundPosition: bgPosition,
+            backgroundAttachment: bgFix ? 'fixed' : 'scroll',
+          }}
+        />
+      )}
       <div
         ref={contentRef}
-        className={cn('p-10 lg:px-8 relative z-10', columnClass, textAlignClass)}
+        className={cn('p-10 lg:px-8 relative z-10 ', columnClass, textAlignClass)}
         style={{color: contentColor}}
       >
         {header && (
@@ -169,13 +226,13 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
         )}
 
         {body && (
-          <p className={cn('tracking-widest whitespace-pre-line', contentFont, bodyFontWeight)}>
+          <p className={cn('tracking-widest md:whitespace-pre-line text-center', contentFont, bodyFontWeight)}>
             {body}
           </p>
         )}
 
         {urlLabel && url && (
-          <h2 className={cn('md:text-base lg:text-lg py-10')}>
+          <h2 className={cn('text-sm md:text-base lg:text-lg py-10')}>
             <a href={url} target="_blank" rel="noreferrer" style={{color: contentColor}}>
               <span className={cn('nav-underline-dual', urlTextItalic && 'italic', ctaFontWeight, contentFont)}>
                 {urlLabel}
