@@ -210,7 +210,6 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
     >
       {bgImageMobile && (
         isStackedMobile ? (
-          //sini
           <img
             src={bgImageMobile.url}
             alt={bgImageMobile.altText || ''}
@@ -226,8 +225,8 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
                 backgroundImage: `url('${bgImageMobile.url}')`,
                 backgroundPosition: bgPosition,
                 transform: 'translateY(0)',
-                height: '120%', // extra height so it can move
-                top: '-10%',
+                height: '125%', // extra height so it can move
+                top: '-5%',
               }}
             />
           </div>
