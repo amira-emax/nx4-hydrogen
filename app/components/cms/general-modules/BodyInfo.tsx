@@ -238,7 +238,7 @@ export function BodyInfo({reference}: BodyInfoProps) {
       >
         {bgImageMobile && (
           <div
-            className="absolute inset-0 z-0 bg-no-repeat bg-cover bg-top md:hidden"
+            className="absolute inset-0 z-0 bg-no-repeat bg-cover bg-right md:hidden"
             style={{backgroundImage: `url('${bgImageMobile.url}')`}}
           />
         )}

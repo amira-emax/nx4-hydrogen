@@ -273,6 +273,13 @@ export type BodyInfoFragment = Pick<StorefrontAPI.Metaobject, 'id' | 'type'> & {
       >;
     }>;
   }>;
+  bgImageMobile?: StorefrontAPI.Maybe<{
+    reference?: StorefrontAPI.Maybe<{
+      image?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'height' | 'width' | 'url' | 'altText'>
+      >;
+    }>;
+  }>;
   featuredImage?: StorefrontAPI.Maybe<{
     reference?: StorefrontAPI.Maybe<{
       image?: StorefrontAPI.Maybe<
@@ -345,6 +352,13 @@ export type BodyInfoFragment = Pick<StorefrontAPI.Metaobject, 'id' | 'type'> & {
     Pick<StorefrontAPI.MetaobjectField, 'value'>
   >;
   sectionImage?: StorefrontAPI.Maybe<{
+    reference?: StorefrontAPI.Maybe<{
+      image?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'height' | 'width' | 'url' | 'altText'>
+      >;
+    }>;
+  }>;
+  sectionImageMobile?: StorefrontAPI.Maybe<{
     reference?: StorefrontAPI.Maybe<{
       image?: StorefrontAPI.Maybe<
         Pick<StorefrontAPI.Image, 'height' | 'width' | 'url' | 'altText'>
@@ -844,6 +858,9 @@ export type IntroductionFragment = Pick<
     }>;
   }>;
   bgOverlay?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+  bgOverlayMobile?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
   heroHeaderTop?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.MetaobjectField, 'value'>
   >;
@@ -863,7 +880,17 @@ export type IntroductionFragment = Pick<
       >;
     }>;
   }>;
+  heroImageMobile?: StorefrontAPI.Maybe<{
+    reference?: StorefrontAPI.Maybe<{
+      image?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'height' | 'width' | 'url' | 'altText'>
+      >;
+    }>;
+  }>;
   heroImageOverlay?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  heroImageOverlayMobile?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.MetaobjectField, 'value'>
   >;
   imageSize?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
@@ -1081,11 +1108,24 @@ export type ScrollableImageFragment = Pick<
       >;
     }>;
   }>;
+  bgImageMobile?: StorefrontAPI.Maybe<{
+    reference?: StorefrontAPI.Maybe<{
+      image?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'height' | 'width' | 'url' | 'altText'>
+      >;
+    }>;
+  }>;
   bgPosition?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.MetaobjectField, 'value'>
   >;
   bgFix?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
   sectionHeight?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  sectionHeightMobile?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.MetaobjectField, 'value'>
+  >;
+  mobileTextLayout?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.MetaobjectField, 'value'>
   >;
   textFade?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
@@ -2067,6 +2107,9 @@ export type PromotionPageCmsQuery = {
               bgOverlay?: StorefrontAPI.Maybe<
                 Pick<StorefrontAPI.MetaobjectField, 'value'>
               >;
+              bgOverlayMobile?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
               heroHeaderTop?: StorefrontAPI.Maybe<
                 Pick<StorefrontAPI.MetaobjectField, 'value'>
               >;
@@ -2089,7 +2132,20 @@ export type PromotionPageCmsQuery = {
                   >;
                 }>;
               }>;
+              heroImageMobile?: StorefrontAPI.Maybe<{
+                reference?: StorefrontAPI.Maybe<{
+                  image?: StorefrontAPI.Maybe<
+                    Pick<
+                      StorefrontAPI.Image,
+                      'height' | 'width' | 'url' | 'altText'
+                    >
+                  >;
+                }>;
+              }>;
               heroImageOverlay?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              heroImageOverlayMobile?: StorefrontAPI.Maybe<
                 Pick<StorefrontAPI.MetaobjectField, 'value'>
               >;
               imageSize?: StorefrontAPI.Maybe<
@@ -2194,6 +2250,16 @@ export type PromotionPageCmsQuery = {
                   >;
                 }>;
               }>;
+              bgImageMobile?: StorefrontAPI.Maybe<{
+                reference?: StorefrontAPI.Maybe<{
+                  image?: StorefrontAPI.Maybe<
+                    Pick<
+                      StorefrontAPI.Image,
+                      'height' | 'width' | 'url' | 'altText'
+                    >
+                  >;
+                }>;
+              }>;
               bgPosition?: StorefrontAPI.Maybe<
                 Pick<StorefrontAPI.MetaobjectField, 'value'>
               >;
@@ -2201,6 +2267,12 @@ export type PromotionPageCmsQuery = {
                 Pick<StorefrontAPI.MetaobjectField, 'value'>
               >;
               sectionHeight?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              sectionHeightMobile?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MetaobjectField, 'value'>
+              >;
+              mobileTextLayout?: StorefrontAPI.Maybe<
                 Pick<StorefrontAPI.MetaobjectField, 'value'>
               >;
               textFade?: StorefrontAPI.Maybe<
@@ -2328,6 +2400,16 @@ export type PromotionPageCmsQuery = {
                 Pick<StorefrontAPI.MetaobjectField, 'value'>
               >;
               sectionImage?: StorefrontAPI.Maybe<{
+                reference?: StorefrontAPI.Maybe<{
+                  image?: StorefrontAPI.Maybe<
+                    Pick<
+                      StorefrontAPI.Image,
+                      'height' | 'width' | 'url' | 'altText'
+                    >
+                  >;
+                }>;
+              }>;
+              sectionImageMobile?: StorefrontAPI.Maybe<{
                 reference?: StorefrontAPI.Maybe<{
                   image?: StorefrontAPI.Maybe<
                     Pick<
@@ -2920,6 +3002,18 @@ export type ProductVariantFragment = Pick<
   unitPrice?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>
   >;
+  variantImages?: StorefrontAPI.Maybe<{
+    references?: StorefrontAPI.Maybe<{
+      nodes: Array<{
+        image?: StorefrontAPI.Maybe<
+          Pick<
+            StorefrontAPI.Image,
+            'id' | 'url' | 'altText' | 'width' | 'height'
+          >
+        >;
+      }>;
+    }>;
+  }>;
 };
 
 export type ProductFragment = Pick<
@@ -2959,6 +3053,18 @@ export type ProductFragment = Pick<
               unitPrice?: StorefrontAPI.Maybe<
                 Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>
               >;
+              variantImages?: StorefrontAPI.Maybe<{
+                references?: StorefrontAPI.Maybe<{
+                  nodes: Array<{
+                    image?: StorefrontAPI.Maybe<
+                      Pick<
+                        StorefrontAPI.Image,
+                        'id' | 'url' | 'altText' | 'width' | 'height'
+                      >
+                    >;
+                  }>;
+                }>;
+              }>;
             }
           >;
           swatch?: StorefrontAPI.Maybe<
@@ -2996,6 +3102,18 @@ export type ProductFragment = Pick<
       unitPrice?: StorefrontAPI.Maybe<
         Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>
       >;
+      variantImages?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          nodes: Array<{
+            image?: StorefrontAPI.Maybe<
+              Pick<
+                StorefrontAPI.Image,
+                'id' | 'url' | 'altText' | 'width' | 'height'
+              >
+            >;
+          }>;
+        }>;
+      }>;
     }
   >;
   adjacentVariants: Array<
@@ -3020,6 +3138,18 @@ export type ProductFragment = Pick<
       unitPrice?: StorefrontAPI.Maybe<
         Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>
       >;
+      variantImages?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          nodes: Array<{
+            image?: StorefrontAPI.Maybe<
+              Pick<
+                StorefrontAPI.Image,
+                'id' | 'url' | 'altText' | 'width' | 'height'
+              >
+            >;
+          }>;
+        }>;
+      }>;
     }
   >;
   seo: Pick<StorefrontAPI.Seo, 'description' | 'title'>;
@@ -3342,6 +3472,18 @@ export type ProductQuery = {
                   unitPrice?: StorefrontAPI.Maybe<
                     Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>
                   >;
+                  variantImages?: StorefrontAPI.Maybe<{
+                    references?: StorefrontAPI.Maybe<{
+                      nodes: Array<{
+                        image?: StorefrontAPI.Maybe<
+                          Pick<
+                            StorefrontAPI.Image,
+                            'id' | 'url' | 'altText' | 'width' | 'height'
+                          >
+                        >;
+                      }>;
+                    }>;
+                  }>;
                 }
               >;
               swatch?: StorefrontAPI.Maybe<
@@ -3379,6 +3521,18 @@ export type ProductQuery = {
           unitPrice?: StorefrontAPI.Maybe<
             Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>
           >;
+          variantImages?: StorefrontAPI.Maybe<{
+            references?: StorefrontAPI.Maybe<{
+              nodes: Array<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<
+                    StorefrontAPI.Image,
+                    'id' | 'url' | 'altText' | 'width' | 'height'
+                  >
+                >;
+              }>;
+            }>;
+          }>;
         }
       >;
       adjacentVariants: Array<
@@ -3403,6 +3557,18 @@ export type ProductQuery = {
           unitPrice?: StorefrontAPI.Maybe<
             Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>
           >;
+          variantImages?: StorefrontAPI.Maybe<{
+            references?: StorefrontAPI.Maybe<{
+              nodes: Array<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<
+                    StorefrontAPI.Image,
+                    'id' | 'url' | 'altText' | 'width' | 'height'
+                  >
+                >;
+              }>;
+            }>;
+          }>;
         }
       >;
       seo: Pick<StorefrontAPI.Seo, 'description' | 'title'>;
@@ -4055,7 +4221,7 @@ interface GeneratedQueryTypes {
     return: OriginsPageCmsQuery;
     variables: OriginsPageCmsQueryVariables;
   };
-  '#graphql\n  # Generic fragments\n  #graphql\n  fragment Image on MediaImage {\n    image {\n      height\n      width\n      url\n      altText\n    }\n  }\n\n\n  # Module fragments\n  #graphql\n  fragment Introduction on Metaobject {\n    id\n    type\n    bgImage: field(key: "bg_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    bgOverlay: field(key: "bg_overlay") {\n      value\n    }\n    heroHeaderTop: field(key: "hero_header_top") {\n      value\n    }\n    headerTopColorType: field(key: "header_top_color_type") {\n      value\n    }\n    headerTopColor: field(key: "header_top_color") {\n      value\n    }\n    headerTopGradient: field(key: "header_top_gradient") {\n      value\n    }\n    heroImage: field(key: "hero_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    heroImageOverlay: field(key: "hero_image_overlay") {\n      value\n    }\n    imageSize: field(key: "image_size") {\n      value\n    }\n    imgPaddingTop: field(key: "img_padding_top") {\n      value\n    }\n    imgPaddingBottom: field(key: "img_padding_bottom") {\n      value\n    }\n    layout: field(key: "layout") {\n      value\n    }\n    textAlign: field(key: "text_align") {\n      value\n    }\n    heroHeader: field(key: "hero_header") {\n      value\n    }\n    headerColorType: field(key: "header_color_type") {\n      value\n    }\n    headerColor: field(key: "header_color") {\n      value\n    }\n    headerGradient: field(key: "header_gradient") {\n      value\n    }\n    heroLabel: field(key: "hero_label") {\n      value\n    }\n    heroDescription: field(key: "hero_description") {\n      value\n    }\n    urlLabel: field(key: "url_label") {\n      value\n    }\n    url: field(key: "url") {\n      value\n    }\n    contentColor: field(key: "content_color") {\n      value\n    }\n    gridLabel: field(key: "grid_label") {\n      value\n    }\n    gridTitle: field(key: "grid_title") {\n      value\n    }\n    gridTextColor: field(key: "grid_text_color") {\n      value\n    }\n    gridHeadingAlign: field(key: "grid_heading_align") {\n      value\n    }\n    imageAspect: field(key: "image_aspect") {\n      value\n    }\n    overlay: field(key: "overlay") {\n      value\n    }\n    overlayColor: field(key: "overlay_color") {\n      value\n    }\n    textShadow: field(key: "text_shadow") {\n      value\n    }\n    bottomHeader: field(key: "header") {\n      value\n    }\n    bottomDescription: field(key: "description") {\n      value\n    }\n    bottomDescPaddingTop: field(key: "bottom_desc_padding_top") {\n      value\n    }\n    bottomDescPaddingBottom: field(key: "bottom_desc_padding_bottom") {\n      value\n    }\n    imageBlocks: field(key: "image_blocks") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            id\n            brandImage: field(key: "brand_image") {\n              reference {\n                ... on MediaImage {\n                  ...Image\n                }\n              }\n            }\n            text: field(key: "text") {\n              value\n            }\n            textPosition: field(key: "text_position") {\n              value\n            }\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment ScrollableImage on Metaobject {\n    id\n    type\n    bgImage: field(key: "bg_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    bgPosition: field(key: "bg_position") {\n      value\n    }\n    bgFix: field(key: "bg_fix") {\n      value\n    }\n    sectionHeight: field(key: "section_height") {\n      value\n    }\n    textFade: field(key: "text_fade") {\n      value\n    }\n    contentFont: field(key: "content_font") {\n      value\n    }\n    headerFont: field(key: "header_font") {\n      value\n    }\n    headerColorType: field(key: "header_color_type") {\n      value\n    }\n    headerColor: field(key: "header_color") {\n      value\n    }\n    headerGradient: field(key: "header_gradient") {\n      value\n    }\n    contentColor: field(key: "content_color") {\n      value\n    }\n    textPosition: field(key: "text_position") {\n      value\n    }\n    textAlignment: field(key: "text_alignment") {\n      value\n    }\n    contentAlignment: field(key: "content_alignment") {\n      value\n    }\n    header: field(key: "header") {\n      value\n    }\n    label: field(key: "label") {\n      value\n    }\n    labelFontSize: field(key: "label_font_size") {\n      value\n    }\n    body: field(key: "body") {\n      value\n    }\n    bodyFontWeight: field(key: "body_font_weight") {\n      value\n    }\n    urlLabel: field(key: "url_label") {\n      value\n    }\n    url: field(key: "url") {\n      value\n    }\n    urlTextItalic: field(key: "url_text_italic") {\n      value\n    }\n    ctaFontWeight: field(key: "cta_font_weight") {\n      value\n    }\n    logoImages: field(key: "logo_images") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            id\n            logoImage: field(key: "logo_image") {\n              reference {\n                ... on MediaImage {\n                  ...Image\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment BodyInfo on Metaobject {\n    id\n    type\n    bgImage: field(key: "bg_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    featuredImage: field(key: "image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    featuredImages: field(key: "featured_images") {\n      references(first: 10) {\n        nodes {\n          ... on MediaImage {\n            ...Image\n          }\n        }\n      }\n    }\n    featuredVideo: field(key: "video") {\n      reference {\n        ... on Video {\n          id\n          sources {\n            url\n            mimeType\n          }\n        }\n      }\n    }\n    sectionHeaderPadding: field(key: "section_header_padding") {\n      value\n    }\n    title: field(key: "title") {\n      value\n    }\n    titleItalic: field(key: "title_italic") {\n      value\n    }\n    titleSemibold: field(key: "title_semibold") {\n      value\n    }\n    subTitleNumber: field(key: "sub_title_number") {\n      value\n    }\n    subTitle: field(key: "sub_title") {\n      value\n    }\n    description: field(key: "description") {\n      value\n    }\n    caption: field(key: "caption") {\n      value\n    }\n    headerFont: field(key: "header_font") {\n      value\n    }\n    contentFont: field(key: "content_font") {\n      value\n    }\n    headerColorType: field(key: "header_color_type") {\n      value\n    }\n    headerColor: field(key: "header_color") {\n      value\n    }\n    headerGradient: field(key: "header_gradient") {\n      value\n    }\n    contentColor: field(key: "content_color") {\n      value\n    }\n    sectionContentPadding: field(key: "section_content_padding") {\n      value\n    }\n    brandHeader: field(key: "brand_header") {\n      value\n    }\n    brandSubHeader: field(key: "brand_sub_header") {\n      value\n    }\n    brandDescription: field(key: "brand_description") {\n      value\n    }\n    sectionImage: field(key: "section_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    certLogos: field(key: "cert_logos") {\n      references(first: 10) {\n        nodes {\n          ... on MediaImage {\n            id\n            image {\n              url\n              altText\n              width\n              height\n            }\n          }\n        }\n      }\n    }\n    certText: field(key: "cert_text") {\n      value\n    }\n    textUrl: field(key: "text_url") {\n      value\n    }\n    linkUrl: field(key: "link_url") {\n      value\n    }\n    urlLabelItalic: field(key: "url_label_italic") {\n      value\n    }\n    mediaItemHeight: field(key: "media_item_height") {\n      value\n    }\n    mediaBlocks: field(key: "media_blocks") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            id\n            blockVideo: field(key: "video") {\n              reference {\n                ... on Video {\n                  id\n                  sources {\n                    url\n                    mimeType\n                  }\n                }\n              }\n            }\n            name: field(key: "name") {\n              value\n            }\n            textPosition: field(key: "text_position") {\n              value\n            }\n          }\n        }\n      }\n    }\n  }\n\n\n  query PromotionPageCms($handle: String!) {\n    promotionPage: metaobject(handle: {handle: $handle, type: "promotion_page"}) {\n      id\n      handle\n      topLogo: field(key: "top_logo") {\n        reference {\n          ... on MediaImage {\n            ...Image\n          }\n        }\n      }\n      topLabel: field(key: "top_label") {\n        value\n      }\n      modules: field(key: "modules") {\n        references(first: 20) {\n          nodes {\n            ... on Metaobject {\n              id\n              type\n              # Module fragments\n              ...Introduction\n              ...ScrollableImage\n              ...BodyInfo\n            }\n          }\n        }\n      }\n    }\n  }\n': {
+  '#graphql\n  # Generic fragments\n  #graphql\n  fragment Image on MediaImage {\n    image {\n      height\n      width\n      url\n      altText\n    }\n  }\n\n\n  # Module fragments\n  #graphql\n  fragment Introduction on Metaobject {\n    id\n    type\n    bgImage: field(key: "bg_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    bgOverlay: field(key: "bg_overlay") {\n      value\n    }\n    bgOverlayMobile: field(key: "background_overlay_mobile") {\n      value\n    }\n    heroHeaderTop: field(key: "hero_header_top") {\n      value\n    }\n    headerTopColorType: field(key: "header_top_color_type") {\n      value\n    }\n    headerTopColor: field(key: "header_top_color") {\n      value\n    }\n    headerTopGradient: field(key: "header_top_gradient") {\n      value\n    }\n    heroImage: field(key: "hero_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    heroImageMobile: field(key: "hero_image_mobile") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    heroImageOverlay: field(key: "hero_image_overlay") {\n      value\n    }\n    heroImageOverlayMobile: field(key: "hero_image_overlay_mobile") {\n      value\n    }\n    imageSize: field(key: "image_size") {\n      value\n    }\n    imgPaddingTop: field(key: "img_padding_top") {\n      value\n    }\n    imgPaddingBottom: field(key: "img_padding_bottom") {\n      value\n    }\n    layout: field(key: "layout") {\n      value\n    }\n    textAlign: field(key: "text_align") {\n      value\n    }\n    heroHeader: field(key: "hero_header") {\n      value\n    }\n    headerColorType: field(key: "header_color_type") {\n      value\n    }\n    headerColor: field(key: "header_color") {\n      value\n    }\n    headerGradient: field(key: "header_gradient") {\n      value\n    }\n    heroLabel: field(key: "hero_label") {\n      value\n    }\n    heroDescription: field(key: "hero_description") {\n      value\n    }\n    urlLabel: field(key: "url_label") {\n      value\n    }\n    url: field(key: "url") {\n      value\n    }\n    contentColor: field(key: "content_color") {\n      value\n    }\n    gridLabel: field(key: "grid_label") {\n      value\n    }\n    gridTitle: field(key: "grid_title") {\n      value\n    }\n    gridTextColor: field(key: "grid_text_color") {\n      value\n    }\n    gridHeadingAlign: field(key: "grid_heading_align") {\n      value\n    }\n    imageAspect: field(key: "image_aspect") {\n      value\n    }\n    overlay: field(key: "overlay") {\n      value\n    }\n    overlayColor: field(key: "overlay_color") {\n      value\n    }\n    textShadow: field(key: "text_shadow") {\n      value\n    }\n    bottomHeader: field(key: "header") {\n      value\n    }\n    bottomDescription: field(key: "description") {\n      value\n    }\n    bottomDescPaddingTop: field(key: "bottom_desc_padding_top") {\n      value\n    }\n    bottomDescPaddingBottom: field(key: "bottom_desc_padding_bottom") {\n      value\n    }\n    imageBlocks: field(key: "image_blocks") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            id\n            brandImage: field(key: "brand_image") {\n              reference {\n                ... on MediaImage {\n                  ...Image\n                }\n              }\n            }\n            text: field(key: "text") {\n              value\n            }\n            textPosition: field(key: "text_position") {\n              value\n            }\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment ScrollableImage on Metaobject {\n    id\n    type\n    bgImage: field(key: "bg_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    bgImageMobile: field(key: "background_image_mobile") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    bgPosition: field(key: "bg_position") {\n      value\n    }\n    bgFix: field(key: "bg_fix") {\n      value\n    }\n    sectionHeight: field(key: "section_height") {\n      value\n    }\n    sectionHeightMobile: field(key: "section_height_mobile") {\n      value\n    }\n    mobileTextLayout: field(key: "mobile_text_layout") {\n      value\n    }\n    textFade: field(key: "text_fade") {\n      value\n    }\n    contentFont: field(key: "content_font") {\n      value\n    }\n    headerFont: field(key: "header_font") {\n      value\n    }\n    headerColorType: field(key: "header_color_type") {\n      value\n    }\n    headerColor: field(key: "header_color") {\n      value\n    }\n    headerGradient: field(key: "header_gradient") {\n      value\n    }\n    contentColor: field(key: "content_color") {\n      value\n    }\n    textPosition: field(key: "text_position") {\n      value\n    }\n    textAlignment: field(key: "text_alignment") {\n      value\n    }\n    contentAlignment: field(key: "content_alignment") {\n      value\n    }\n    header: field(key: "header") {\n      value\n    }\n    label: field(key: "label") {\n      value\n    }\n    labelFontSize: field(key: "label_font_size") {\n      value\n    }\n    body: field(key: "body") {\n      value\n    }\n    bodyFontWeight: field(key: "body_font_weight") {\n      value\n    }\n    urlLabel: field(key: "url_label") {\n      value\n    }\n    url: field(key: "url") {\n      value\n    }\n    urlTextItalic: field(key: "url_text_italic") {\n      value\n    }\n    ctaFontWeight: field(key: "cta_font_weight") {\n      value\n    }\n    logoImages: field(key: "logo_images") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            id\n            logoImage: field(key: "logo_image") {\n              reference {\n                ... on MediaImage {\n                  ...Image\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment BodyInfo on Metaobject {\n    id\n    type\n    bgImage: field(key: "bg_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    bgImageMobile: field(key: "background_image_mobile") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    featuredImage: field(key: "image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    featuredImages: field(key: "featured_images") {\n      references(first: 10) {\n        nodes {\n          ... on MediaImage {\n            ...Image\n          }\n        }\n      }\n    }\n    featuredVideo: field(key: "video") {\n      reference {\n        ... on Video {\n          id\n          sources {\n            url\n            mimeType\n          }\n        }\n      }\n    }\n    sectionHeaderPadding: field(key: "section_header_padding") {\n      value\n    }\n    title: field(key: "title") {\n      value\n    }\n    titleItalic: field(key: "title_italic") {\n      value\n    }\n    titleSemibold: field(key: "title_semibold") {\n      value\n    }\n    subTitleNumber: field(key: "sub_title_number") {\n      value\n    }\n    subTitle: field(key: "sub_title") {\n      value\n    }\n    description: field(key: "description") {\n      value\n    }\n    caption: field(key: "caption") {\n      value\n    }\n    headerFont: field(key: "header_font") {\n      value\n    }\n    contentFont: field(key: "content_font") {\n      value\n    }\n    headerColorType: field(key: "header_color_type") {\n      value\n    }\n    headerColor: field(key: "header_color") {\n      value\n    }\n    headerGradient: field(key: "header_gradient") {\n      value\n    }\n    contentColor: field(key: "content_color") {\n      value\n    }\n    sectionContentPadding: field(key: "section_content_padding") {\n      value\n    }\n    brandHeader: field(key: "brand_header") {\n      value\n    }\n    brandSubHeader: field(key: "brand_sub_header") {\n      value\n    }\n    brandDescription: field(key: "brand_description") {\n      value\n    }\n    sectionImage: field(key: "section_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    sectionImageMobile: field(key: "section_image_mobile") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    certLogos: field(key: "cert_logos") {\n      references(first: 10) {\n        nodes {\n          ... on MediaImage {\n            id\n            image {\n              url\n              altText\n              width\n              height\n            }\n          }\n        }\n      }\n    }\n    certText: field(key: "cert_text") {\n      value\n    }\n    textUrl: field(key: "text_url") {\n      value\n    }\n    linkUrl: field(key: "link_url") {\n      value\n    }\n    urlLabelItalic: field(key: "url_label_italic") {\n      value\n    }\n    mediaItemHeight: field(key: "media_item_height") {\n      value\n    }\n    mediaBlocks: field(key: "media_blocks") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            id\n            blockVideo: field(key: "video") {\n              reference {\n                ... on Video {\n                  id\n                  sources {\n                    url\n                    mimeType\n                  }\n                }\n              }\n            }\n            name: field(key: "name") {\n              value\n            }\n            textPosition: field(key: "text_position") {\n              value\n            }\n          }\n        }\n      }\n    }\n  }\n\n\n  query PromotionPageCms($handle: String!) {\n    promotionPage: metaobject(handle: {handle: $handle, type: "promotion_page"}) {\n      id\n      handle\n      topLogo: field(key: "top_logo") {\n        reference {\n          ... on MediaImage {\n            ...Image\n          }\n        }\n      }\n      topLabel: field(key: "top_label") {\n        value\n      }\n      modules: field(key: "modules") {\n        references(first: 20) {\n          nodes {\n            ... on Metaobject {\n              id\n              type\n              # Module fragments\n              ...Introduction\n              ...ScrollableImage\n              ...BodyInfo\n            }\n          }\n        }\n      }\n    }\n  }\n': {
     return: PromotionPageCmsQuery;
     variables: PromotionPageCmsQueryVariables;
   };
@@ -4083,7 +4249,7 @@ interface GeneratedQueryTypes {
     return: PolicyArticleQuery;
     variables: PolicyArticleQueryVariables;
   };
-  '#graphql\n  query Product(\n    $country: CountryCode\n    $handle: String!\n    $language: LanguageCode\n    $selectedOptions: [SelectedOptionInput!]!\n  ) @inContext(country: $country, language: $language) {\n    product(handle: $handle) {\n      ...Product\n    }\n  }\n  #graphql\n  fragment Product on Product {\n    id\n    title\n    vendor\n    handle\n    descriptionHtml\n    description\n    encodedVariantExistence\n    encodedVariantAvailability\n    options {\n      name\n      optionValues {\n        name\n        firstSelectableVariant {\n          ...ProductVariant\n        }\n        swatch {\n          color\n          image {\n            previewImage {\n              url\n            }\n          }\n        }\n      }\n    }\n    selectedOrFirstAvailableVariant(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {\n      ...ProductVariant\n    }\n    adjacentVariants (selectedOptions: $selectedOptions) {\n      ...ProductVariant\n    }\n    seo {\n      description\n      title\n    }\n    images(first: 10) { \n      nodes {\n        id\n        height\n        width\n        url\n        altText\n      }\n    }\n    highlights: metafield(namespace: "custom", key: "highlights") {\n       references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            ...AccordionItem\n          }\n        }\n      }\n    }\n    certifiedLogos: metafield(namespace: "custom", key: "certified_logos") {\n      references(first: 10) {\n        nodes {\n          ... on MediaImage {\n            ...Image\n          }\n        }\n      }\n    }\n    showProductHelp: metafield(namespace: "custom", key: "show_product_help") {\n      value\n    }\n    productHelp: metafield(namespace: "custom", key: "product_help") {\n      reference {\n        ... on Metaobject {\n          ...ProductHelp\n        }\n      }\n    }\n    complimentaryShipping: metafield(namespace: "custom", key: "complimentary_shipping") {\n      value\n    }\n    cta: metafield(namespace: "custom", key: "cta") {\n      reference {\n        ... on Metaobject {\n          ...Cta\n        }\n      }\n    }\n    modules: metafield(namespace: "custom", key: "modules") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            id\n            type\n            # Module fragments\n            ...ProductBenefits\n            ...ProductCores\n          }\n        }\n      }\n    }\n    ctaExtra: metafield(namespace: "custom", key: "cta_extra") {\n      reference {\n        ... on Metaobject {\n          ...Cta\n        }\n      }\n    }\n    relatedProducts: metafield(namespace: "custom", key: "related_products") {\n      references(first: 10) {\n        nodes {\n          ... on Product {\n            ...CollectionItem\n          }\n        }\n      }\n    }\n  }\n  #graphql\n  fragment ProductVariant on ProductVariant {\n    availableForSale\n    compareAtPrice {\n      amount\n      currencyCode\n    }\n    id\n    image {\n      __typename\n      id\n      url\n      altText\n      width\n      height\n    }\n    price {\n      amount\n      currencyCode\n    }\n    product {\n      title\n      handle\n    }\n    selectedOptions {\n      name\n      value\n    }\n    sku\n    title\n    unitPrice {\n      amount\n      currencyCode\n    }\n  }\n\n  #graphql\n  fragment AccordionItem on Metaobject {\n    id\n    type\n    label: field(key: "label") {\n      value\n    }\n    content: field(key: "content") {\n      value\n    }\n  }\n  #graphql\n  fragment ProductFeatureCard on Metaobject {\n    id\n    type\n    title: field(key: "title") {\n      value\n    }\n    label: field(key: "label") {\n      value\n    }\n  }\n  #graphql\n  fragment ProductBenefits on Metaobject {\n    id\n    type\n    label: field(key: "label") {\n      value\n    }\n    title: field(key: "title") {\n      value\n    }\n    cards: field(key: "cards") {\n      references(first: 20) {\n        nodes {\n          ... on Metaobject {\n            ...ProductFeatureCard\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment Image on MediaImage {\n    image {\n      height\n      width\n      url\n      altText\n    }\n  }\n\n  #graphql\n  fragment ProductCores on Metaobject {\n    id\n    type\n    labels: field(key: "labels") {\n      value\n    }\n    desktopImage: field(key: "desktop_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    mobileImage: field(key: "mobile_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment Accordion on Metaobject {\n    id\n    type\n    title: field(key: "title") {\n      value\n    }\n    items: field(key: "items") {\n      references(first: 20) {\n        nodes {\n          ...AccordionItem\n        }\n      }\n    }\n    icon: field(key: "icon") {\n      value\n    }\n  }\n  #graphql\n  fragment Cta on Metaobject {\n    id\n    type\n    label: field(key: "label") {\n      value\n    }\n    internalUrl: field(key: "internal_url") {\n      value\n    }\n    externalUrl: field(key: "external_url") {\n      value\n    }\n    referencedProduct: field(key: "referenced_product") {\n      reference {\n        ... on Product{\n          id\n          title\n          handle\n        }\n      }\n    }\n    buttonVariant: field(key: "button_variant") {\n      value\n    }\n    buttonSize: field(key: "button_size") {\n      value\n    }\n    iconVariant: field(key: "icon_variant") {\n      value\n    }\n  }\n  #graphql\n  fragment TextBlockWithCta on Metaobject {\n    id\n    type\n    title: field(key: "title") {\n      value\n    }\n    description: field(key: "description") {\n      value\n    }\n    cta: field(key: "cta") {\n      reference {\n        ...Cta\n      }\n    }\n  }\n  #graphql\n  fragment ProductHelp on Metaobject {\n    id\n    type\n    accordion: field(key: "accordion") {\n      reference {\n        ... on Metaobject {\n          ...Accordion\n        }\n      }\n    }\n    textBlocksGroup: field(key: "text_blocks_group") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            ...TextBlockWithCta\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment MoneyCollectionItem on MoneyV2 {\n    amount\n    currencyCode\n  }\n  fragment CollectionItem on Product {\n    id\n    handle\n    title\n    featuredImage {\n      id\n      altText\n      url\n      width\n      height\n    }\n    priceRange {\n      minVariantPrice {\n        ...MoneyCollectionItem\n      }\n      maxVariantPrice {\n        ...MoneyCollectionItem\n      }\n    }\n    compareAtPriceRange {\n      minVariantPrice {\n        ...MoneyCollectionItem\n      }\n      maxVariantPrice {\n        ...MoneyCollectionItem\n      }\n    }\n    selectedOrFirstAvailableVariant(ignoreUnknownOptions: true) {\n      id\n      availableForSale\n    }\n    productType\n    cardLabel: metafield(key: "card_label", namespace: "custom") {\n      type\n      value\n    }\n    cardImage: metafield(key: "card_image", namespace: "custom") {\n      reference {\n        ... on MediaImage {\n          image {\n            height\n            width\n            url\n            altText\n          }\n        }\n      }\n    }\n  }\n\n\n': {
+  '#graphql\n  query Product(\n    $country: CountryCode\n    $handle: String!\n    $language: LanguageCode\n    $selectedOptions: [SelectedOptionInput!]!\n  ) @inContext(country: $country, language: $language) {\n    product(handle: $handle) {\n      ...Product\n    }\n  }\n  #graphql\n  fragment Product on Product {\n    id\n    title\n    vendor\n    handle\n    descriptionHtml\n    description\n    encodedVariantExistence\n    encodedVariantAvailability\n    options {\n      name\n      optionValues {\n        name\n        firstSelectableVariant {\n          ...ProductVariant\n        }\n        swatch {\n          color\n          image {\n            previewImage {\n              url\n            }\n          }\n        }\n      }\n    }\n    selectedOrFirstAvailableVariant(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {\n      ...ProductVariant\n    }\n    adjacentVariants (selectedOptions: $selectedOptions) {\n      ...ProductVariant\n    }\n    seo {\n      description\n      title\n    }\n    images(first: 10) { \n      nodes {\n        id\n        height\n        width\n        url\n        altText\n      }\n    }\n    highlights: metafield(namespace: "custom", key: "highlights") {\n       references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            ...AccordionItem\n          }\n        }\n      }\n    }\n    certifiedLogos: metafield(namespace: "custom", key: "certified_logos") {\n      references(first: 10) {\n        nodes {\n          ... on MediaImage {\n            ...Image\n          }\n        }\n      }\n    }\n    showProductHelp: metafield(namespace: "custom", key: "show_product_help") {\n      value\n    }\n    productHelp: metafield(namespace: "custom", key: "product_help") {\n      reference {\n        ... on Metaobject {\n          ...ProductHelp\n        }\n      }\n    }\n    complimentaryShipping: metafield(namespace: "custom", key: "complimentary_shipping") {\n      value\n    }\n    cta: metafield(namespace: "custom", key: "cta") {\n      reference {\n        ... on Metaobject {\n          ...Cta\n        }\n      }\n    }\n    modules: metafield(namespace: "custom", key: "modules") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            id\n            type\n            # Module fragments\n            ...ProductBenefits\n            ...ProductCores\n          }\n        }\n      }\n    }\n    ctaExtra: metafield(namespace: "custom", key: "cta_extra") {\n      reference {\n        ... on Metaobject {\n          ...Cta\n        }\n      }\n    }\n    relatedProducts: metafield(namespace: "custom", key: "related_products") {\n      references(first: 10) {\n        nodes {\n          ... on Product {\n            ...CollectionItem\n          }\n        }\n      }\n    }\n  }\n  #graphql\n  fragment ProductVariant on ProductVariant {\n    availableForSale\n    compareAtPrice {\n      amount\n      currencyCode\n    }\n    id\n    image {\n      __typename\n      id\n      url\n      altText\n      width\n      height\n    }\n    price {\n      amount\n      currencyCode\n    }\n    product {\n      title\n      handle\n    }\n    selectedOptions {\n      name\n      value\n    }\n    sku\n    title\n    unitPrice {\n      amount\n      currencyCode\n    }\n    variantImages: metafield(namespace: "custom", key: "images") {\n      references(first: 10) {\n        nodes {\n          ... on MediaImage {\n            image {\n              id\n              url\n              altText\n              width\n              height\n            }\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment AccordionItem on Metaobject {\n    id\n    type\n    label: field(key: "label") {\n      value\n    }\n    content: field(key: "content") {\n      value\n    }\n  }\n  #graphql\n  fragment ProductFeatureCard on Metaobject {\n    id\n    type\n    title: field(key: "title") {\n      value\n    }\n    label: field(key: "label") {\n      value\n    }\n  }\n  #graphql\n  fragment ProductBenefits on Metaobject {\n    id\n    type\n    label: field(key: "label") {\n      value\n    }\n    title: field(key: "title") {\n      value\n    }\n    cards: field(key: "cards") {\n      references(first: 20) {\n        nodes {\n          ... on Metaobject {\n            ...ProductFeatureCard\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment Image on MediaImage {\n    image {\n      height\n      width\n      url\n      altText\n    }\n  }\n\n  #graphql\n  fragment ProductCores on Metaobject {\n    id\n    type\n    labels: field(key: "labels") {\n      value\n    }\n    desktopImage: field(key: "desktop_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n    mobileImage: field(key: "mobile_image") {\n      reference {\n        ... on MediaImage {\n          ...Image\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment Accordion on Metaobject {\n    id\n    type\n    title: field(key: "title") {\n      value\n    }\n    items: field(key: "items") {\n      references(first: 20) {\n        nodes {\n          ...AccordionItem\n        }\n      }\n    }\n    icon: field(key: "icon") {\n      value\n    }\n  }\n  #graphql\n  fragment Cta on Metaobject {\n    id\n    type\n    label: field(key: "label") {\n      value\n    }\n    internalUrl: field(key: "internal_url") {\n      value\n    }\n    externalUrl: field(key: "external_url") {\n      value\n    }\n    referencedProduct: field(key: "referenced_product") {\n      reference {\n        ... on Product{\n          id\n          title\n          handle\n        }\n      }\n    }\n    buttonVariant: field(key: "button_variant") {\n      value\n    }\n    buttonSize: field(key: "button_size") {\n      value\n    }\n    iconVariant: field(key: "icon_variant") {\n      value\n    }\n  }\n  #graphql\n  fragment TextBlockWithCta on Metaobject {\n    id\n    type\n    title: field(key: "title") {\n      value\n    }\n    description: field(key: "description") {\n      value\n    }\n    cta: field(key: "cta") {\n      reference {\n        ...Cta\n      }\n    }\n  }\n  #graphql\n  fragment ProductHelp on Metaobject {\n    id\n    type\n    accordion: field(key: "accordion") {\n      reference {\n        ... on Metaobject {\n          ...Accordion\n        }\n      }\n    }\n    textBlocksGroup: field(key: "text_blocks_group") {\n      references(first: 10) {\n        nodes {\n          ... on Metaobject {\n            ...TextBlockWithCta\n          }\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment MoneyCollectionItem on MoneyV2 {\n    amount\n    currencyCode\n  }\n  fragment CollectionItem on Product {\n    id\n    handle\n    title\n    featuredImage {\n      id\n      altText\n      url\n      width\n      height\n    }\n    priceRange {\n      minVariantPrice {\n        ...MoneyCollectionItem\n      }\n      maxVariantPrice {\n        ...MoneyCollectionItem\n      }\n    }\n    compareAtPriceRange {\n      minVariantPrice {\n        ...MoneyCollectionItem\n      }\n      maxVariantPrice {\n        ...MoneyCollectionItem\n      }\n    }\n    selectedOrFirstAvailableVariant(ignoreUnknownOptions: true) {\n      id\n      availableForSale\n    }\n    productType\n    cardLabel: metafield(key: "card_label", namespace: "custom") {\n      type\n      value\n    }\n    cardImage: metafield(key: "card_image", namespace: "custom") {\n      reference {\n        ... on MediaImage {\n          image {\n            height\n            width\n            url\n            altText\n          }\n        }\n      }\n    }\n  }\n\n\n': {
     return: ProductQuery;
     variables: ProductQueryVariables;
   };

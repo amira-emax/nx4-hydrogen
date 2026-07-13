@@ -96,6 +96,7 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
   const urlTextItalic = reference.urlTextItalic?.value === 'true';
   const ctaFontWeight = reference.ctaFontWeight?.value || 'font-normal';
   const logoNodes = reference.logoImages?.references?.nodes || [];
+  const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!textFade || !contentRef.current) return;
@@ -116,6 +117,37 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
     observer.observe(el);
     return () => observer.disconnect();
   }, [textFade]);
+
+  useEffect(() => {
+  if (!bgFix || !imageRef.current) return;
+
+  let ticking = false;
+
+  const update = () => {
+    if (!imageRef.current) return;
+
+    const rect = imageRef.current.parentElement!.getBoundingClientRect();
+
+    // Adjust speed (0.2 = subtle, 0.5 = stronger)
+    const translate = rect.top * -0.2;
+
+    imageRef.current.style.transform = `translateY(${translate}px)`;
+
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  update();
+
+  return () => window.removeEventListener('scroll', onScroll);
+}, [bgFix]);
 
   const textPositionClass =
     textPosition === 'top'
@@ -178,6 +210,7 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
     >
       {bgImageMobile && (
         isStackedMobile ? (
+          //sini
           <img
             src={bgImageMobile.url}
             alt={bgImageMobile.altText || ''}
@@ -185,14 +218,19 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
             style={mobileAspectRatio ? {aspectRatio: mobileAspectRatio} : undefined}
           />
         ) : (
-          <div
-            className="absolute inset-0 z-0 bg-no-repeat bg-cover md:hidden"
-            style={{
-              backgroundImage: `url('${bgImageMobile.url}')`,
-              backgroundPosition: bgPosition,
-              backgroundAttachment: bgFix ? 'fixed' : 'scroll',
-            }}
-          />
+          <div className="absolute inset-0 overflow-hidden md:hidden">
+            <div
+              ref={imageRef}
+              className="absolute inset-0 bg-cover bg-no-repeat will-change-transform"
+              style={{
+                backgroundImage: `url('${bgImageMobile.url}')`,
+                backgroundPosition: bgPosition,
+                transform: 'translateY(0)',
+                height: '120%', // extra height so it can move
+                top: '-10%',
+              }}
+            />
+          </div>
         )
       )}
       {bgImage && (
