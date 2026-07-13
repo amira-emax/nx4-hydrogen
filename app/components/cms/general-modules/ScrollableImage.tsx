@@ -220,7 +220,7 @@ export function ScrollableImage({reference}: ScrollableImageProps) {
           <div className="absolute inset-0 overflow-hidden md:hidden">
             <div
               ref={imageRef}
-              className="absolute inset-0 bg-cover bg-no-repeat will-change-transform"
+              className="absolute inset-0 bg-right bg-no-repeat will-change-transform"
               style={{
                 backgroundImage: `url('${bgImageMobile.url}')`,
                 backgroundPosition: bgPosition,
